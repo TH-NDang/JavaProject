@@ -1,2 +1,4 @@
 # JavaProject
-đây là phần test mong mọi người thông cảm
+
+đây là phần test mong mọi người
+Hello word!
