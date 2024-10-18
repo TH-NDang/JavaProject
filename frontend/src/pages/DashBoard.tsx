@@ -12,6 +12,7 @@ import {
   X,
   LucideIcon,
 } from "lucide-react";
+import { userRoles, rolePermissions } from "../utils/roles";
 
 type UserRole =
   | "customer"
@@ -19,29 +20,6 @@ type UserRole =
   | "designStaff"
   | "constructionStaff"
   | "manager";
-
-const userRoles: Record<UserRole, string> = {
-  customer: "Khách hàng",
-  consultingStaff: "Nhân viên tư vấn",
-  designStaff: "Nhân viên thiết kế",
-  constructionStaff: "Nhân viên thi công",
-  manager: "Giám đốc",
-};
-
-const rolePermissions: Record<UserRole, string[]> = {
-  customer: ["Trang chủ", "Đơn hàng", "Đánh giá"],
-  consultingStaff: ["Trang chủ", "Khách hàng", "Đơn hàng"],
-  designStaff: ["Trang chủ", "Đơn hàng", "Thi công"],
-  constructionStaff: ["Trang chủ", "Thi công", "Báo cáo"],
-  manager: [
-    "Trang chủ",
-    "Khách hàng",
-    "Đơn hàng",
-    "Thi công",
-    "Báo cáo",
-    "Đánh giá",
-  ],
-};
 
 interface MenuItem {
   icon: LucideIcon;
