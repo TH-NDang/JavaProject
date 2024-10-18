@@ -11,14 +11,4 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(callSuper = true)
 public class CustomerDTO extends UserDTO {
     private String address;
-
-    @Override
-    public String getName() {
-        return "";
-    }
-
-    @Override
-    public String getPhone() {
-        return "";
-    }
 }
