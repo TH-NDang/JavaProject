@@ -16,14 +16,10 @@ const Footer: React.FC = () => {
 
                     <FooterColumn title="Dịch vụ">
                         <ul className="space-y-2">
-                            <li><a href="#" className="hover:text-blue-400 transition duration-300">Thiết kế hồ cá</a>
-                            </li>
-                            <li><a href="/construction" className="hover:text-blue-400 transition duration-300">Thi công hồ cá</a>
-                            </li>
-                            <li><a href="/maintenance" className="hover:text-blue-400 transition duration-300">Bảo dưỡng định
-                                kỳ</a></li>
-                            <li><a href="#" className="hover:text-blue-400 transition duration-300">Tư vấn chăm sóc cá
-                                Koi</a></li>
+                            <li><a href="/design" className="hover:text-blue-400 transition duration-300">Thiết kế hồ cá</a></li>
+                            <li><a href="/construction" className="hover:text-blue-400 transition duration-300">Thi công hồ cá</a></li>
+                            <li><a href="/maintenance" className="hover:text-blue-400 transition duration-300">Bảo dưỡng định kỳ</a></li>
+                            <li><a href="#" className="hover:text-blue-400 transition duration-300">Tư vấn chăm sóc cá Koi</a></li>
                         </ul>
                     </FooterColumn>
 
