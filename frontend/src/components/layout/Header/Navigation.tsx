@@ -1,7 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const Navigation: React.FC = () => {
+interface NavigationProps {
+    activeMenuItem: string;
+    setActiveMenuItem: (item: string) => void;
+}
+
+const Navigation: React.FC<NavigationProps> = ({ activeMenuItem, setActiveMenuItem }) => {
     const navItems = [
         { text: 'Trang chủ', url: '/' },
         { text: 'Mẫu thiết kế', url: '/designs' },
@@ -17,7 +22,8 @@ const Navigation: React.FC = () => {
                     <li key={item.text}>
                         <Link
                             to={item.url}
-                            className="text-gray-600 hover:text-blue-600 transition duration-300"
+                            className={`text-gray-600 hover:text-blue-600 transition duration-300 ${activeMenuItem === item.text ? 'font-bold' : ''}`}
+                            onClick={() => setActiveMenuItem(item.text)}
                         >
                             {item.text}
                         </Link>
