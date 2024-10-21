@@ -5,7 +5,7 @@ import java.util.Optional;
 
 import org.group.koipondbackend.dto.UserDTO;
 import org.group.koipondbackend.entity.User;
-import org.group.koipondbackend.mapper.BaseMapper;
+import org.group.koipondbackend.mapper.GenericMapper;
 import org.group.koipondbackend.repository.UserRepository;
 import org.group.koipondbackend.service.interfaces.UserService;
 
@@ -16,7 +16,7 @@ public abstract class AbstractUserService<T extends User, D extends UserDTO>
         implements UserService<T, D> {
 
     protected final UserRepository<T> repository;
-    protected final BaseMapper<T, D> mapper;
+    protected final GenericMapper<T, D> mapper;
 
     @Override
     public D create(D dto) {

@@ -1,13 +1,16 @@
 package org.group.koipondbackend.dto;
 
+import lombok.AccessLevel;
 import lombok.Data;
+import lombok.experimental.FieldDefaults;
 
 @Data
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public abstract class UserDTO {
-    private Long id;
-    private String username;
-    private String fullName;
-    private String password;
-    private String email;
-    private String phoneNumber;
+    Long id;
+    String username;
+    String fullName;
+    String password;
+    String email;
+    String phoneNumber;
 }

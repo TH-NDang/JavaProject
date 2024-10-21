@@ -50,10 +50,4 @@ public class CustomerController {
         customerService.delete(id);
         return ResponseEntity.ok("Customer deleted successfully");
     }
-
-    // @GetMapping("/search")
-    // public ResponseEntity<List<CustomerDTO>> searchCustomersByName(@RequestParam String name) {
-    //     List<CustomerDTO> customers = customerService.searchByName(name);
-    //     return new ResponseEntity<>(customers, HttpStatus.OK);
-    // }
 }

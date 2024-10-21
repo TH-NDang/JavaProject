@@ -1,31 +1,29 @@
 package org.group.koipondbackend.entity;
 
-
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
+import lombok.AccessLevel;
 import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.experimental.FieldDefaults;
 
 @Entity
 @Table(name = "users")
 @Inheritance(strategy = InheritanceType.JOINED)
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public abstract class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    Long id;
 
-    private String username;
+    String username;
 
     @Column(name = "full_name")
-    private String fullName;
-    private String password;
+    String fullName;
+    String password;
 
     @Column(unique = true)
-    private String email;
+    String email;
 
     @Column(name = "phone_number")
-    private String phoneNumber;
+    String phoneNumber;
 }
