@@ -1,0 +1,10 @@
+package org.group.koipondbackend.repository;
+
+import org.group.koipondbackend.entity.Project;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.List;
+
+public interface ProjectRepository extends JpaRepository<Project, Long> {
+    List<Project> findTop5ByOrderByCreatedDateDesc(); // Lấy 5 dự án gần đây nhất
+}
