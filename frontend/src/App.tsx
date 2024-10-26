@@ -15,9 +15,7 @@ import About from "./pages/public/About";
 import Contact from "./pages/public/Contact";
 
 // Auth Pages
-// import Login from "./pages/auth/Login";
-// import Register from "./pages/auth/Register";
-// import ForgotPassword from "./pages/auth/ForgotPassword";
+import Login from "./pages/auth/Login";
 
 // Customer Pages
 // import CustomerDashboard from "./pages/customer/Dashboard";
@@ -41,32 +39,33 @@ import Contact from "./pages/public/Contact";
 // import AdminReports from "./pages/admin/Reports";
 // import AdminSettings from "./pages/admin/Settings";
 
+import { AuthProvider } from "./contexts/AuthContext";
+
 // Guards
 import PrivateRoute from "./components/guards/PrivateRoute";
 import RoleRoute from "./components/guards/RoleRoute";
 
 const App: React.FC = () => {
   return (
-    <BrowserRouter>
-      <Routes>
-        {/* Public Routes */}
-        <Route element={<PublicLayout />}>
-          <Route path={ROUTES.HOME} element={<Home />} />
-          <Route path={ROUTES.SERVICES} element={<Services />} />
-          <Route path={ROUTES.PORTFOLIO} element={<Portfolio />} />
-          <Route path={ROUTES.ABOUT} element={<About />} />
-          <Route path={ROUTES.CONTACT} element={<Contact />} />
-        </Route>
+    <AuthProvider>
+      <BrowserRouter>
+        <Routes>
+          {/* Public Routes */}
+          <Route element={<PublicLayout />}>
+            <Route path={ROUTES.HOME} element={<Home />} />
+            <Route path={ROUTES.SERVICES} element={<Services />} />
+            <Route path={ROUTES.PORTFOLIO} element={<Portfolio />} />
+            <Route path={ROUTES.ABOUT} element={<About />} />
+            <Route path={ROUTES.CONTACT} element={<Contact />} />
+          </Route>
 
-        {/* Auth Routes */}
-        {/* <Route element={<AuthLayout />}>
-          <Route path={ROUTES.LOGIN} element={<Login />} />
-          <Route path={ROUTES.REGISTER} element={<Register />} />
-          <Route path={ROUTES.FORGOT_PASSWORD} element={<ForgotPassword />} />
-        </Route> */}
+          {/* Auth Routes */}
+          <Route element={<AuthLayout />}>
+            <Route path={ROUTES.LOGIN} element={<Login />} />
+          </Route>
 
-        {/* Customer Routes */}
-        {/* <Route
+          {/* Customer Routes */}
+          {/* <Route
           element={
             <PrivateRoute>
               <RoleRoute roles={[USER_ROLES.CUSTOMER]}>
@@ -91,8 +90,8 @@ const App: React.FC = () => {
           <Route path={ROUTES.CUSTOMER.PROFILE} element={<CustomerProfile />} />
         </Route> */}
 
-        {/* Staff Routes */}
-        {/* <Route
+          {/* Staff Routes */}
+          {/* <Route
           element={
             <PrivateRoute>
               <RoleRoute roles={[USER_ROLES.STAFF]}>
@@ -111,8 +110,8 @@ const App: React.FC = () => {
           <Route path={ROUTES.STAFF.SCHEDULE} element={<StaffSchedule />} />
         </Route> */}
 
-        {/* Admin Routes */}
-        {/* <Route
+          {/* Admin Routes */}
+          {/* <Route
           element={
             <PrivateRoute>
               <RoleRoute roles={[USER_ROLES.ADMIN]}>
@@ -129,10 +128,11 @@ const App: React.FC = () => {
           <Route path={ROUTES.ADMIN.SETTINGS} element={<AdminSettings />} />
         </Route> */}
 
-        {/* Fallback Route */}
-        <Route path="*" element={<Navigate to={ROUTES.HOME} replace />} />
-      </Routes>
-    </BrowserRouter>
+          {/* Fallback Route */}
+          <Route path="*" element={<Navigate to={ROUTES.HOME} replace />} />
+        </Routes>
+      </BrowserRouter>
+    </AuthProvider>
   );
 };
 
