@@ -2,9 +2,9 @@ package org.group.koipondbackend.mapper;
 
 import org.group.koipondbackend.dto.DesignStaffDTO;
 import org.group.koipondbackend.entity.DesignStaff;
-import org.springframework.stereotype.Component;
+import org.mapstruct.Mapper;
 
-@Component
+@Mapper(componentModel = "spring")
 public interface DesignStaffMapper extends GenericMapper<DesignStaff, DesignStaffDTO> {
 
     DesignStaffDTO toDto(DesignStaff entity);
