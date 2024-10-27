@@ -13,6 +13,7 @@ interface Project {
   features: string[];
 }
 
+// !TODO: Get projects from API
 const projects: Project[] = [
   {
     id: 1,

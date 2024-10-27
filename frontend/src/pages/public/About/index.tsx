@@ -25,6 +25,7 @@ const stats = [
   },
 ];
 
+// TODO: get team members from API
 const team = [
   {
     name: 'Nguyễn Văn A',
@@ -113,6 +114,7 @@ const About: React.FC = () => {
               </p>
             </div>
             <div className="grid grid-cols-2 gap-4">
+              {/* TODO: thực hiện các thay thế */}
               <img
                 src="/api/placeholder/400/600"
                 alt="About us 1"

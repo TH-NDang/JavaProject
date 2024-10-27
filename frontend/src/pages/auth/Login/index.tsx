@@ -1,51 +1,48 @@
 import React, { useState } from "react";
-import { Link, useNavigate, useLocation } from "react-router-dom";
-import { Eye, EyeOff, LogIn } from "lucide-react";
-
-interface LoginForm {
-  email: string;
-  password: string;
-}
+import { Link, useNavigate } from "react-router-dom";
+import { Eye, EyeOff, LogIn } from 'lucide-react';
+import { useAuth } from '../../../contexts/AuthContext';
 
 const Login: React.FC = () => {
-  const [form, setForm] = useState<LoginForm>({
-    email: "",
-    password: "",
+  const [form, setForm] = useState({
+    email: '',
+    password: '',
   });
   const [showPassword, setShowPassword] = useState(false);
-  const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
-
+  const { login, error } = useAuth();
   const navigate = useNavigate();
-  const location = useLocation();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setForm((prev) => ({
+    setForm(prev => ({
       ...prev,
       [name]: value,
     }));
-    // Clear error when user starts typing
-    if (error) setError(null);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    setError(null);
 
     try {
-      // TODO: Implement actual login logic here
-      console.log("Login attempt with:", form);
-
-      // Simulating API call
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-
-      // Redirect to dashboard or previous page
-      const from = location.state?.from?.pathname || "/dashboard";
-      navigate(from, { replace: true });
+      const user = await login(form.email, form.password);
+      // Chuyển hướng dựa vào role
+      switch (user.role) {
+        case 'ADMIN':
+          navigate('/admin/dashboard');
+          break;
+        case 'STAFF':
+          navigate('/staff/dashboard');
+          break;
+        case 'CUSTOMER':
+          navigate('/customer/dashboard');
+          break;
+        default:
+          navigate('/');
+      }
     } catch (err) {
-      setError("Email hoặc mật khẩu không chính xác");
+      console.error('Login error:', err);
     } finally {
       setLoading(false);
     }
@@ -61,8 +58,7 @@ const Login: React.FC = () => {
           Đăng nhập vào tài khoản
         </h2>
         <p className="mt-2 text-center text-sm text-gray-600">
-          Vui lòng liên hệ quản trị viên nếu bạn chưa có tài khoản hoặc quên mật
-          khẩu
+          Quản lý đặt thi công hồ cá Koi
         </p>
       </div>
 

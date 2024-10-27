@@ -36,6 +36,7 @@ const Contact: React.FC = () => {
     console.log(form);
   };
 
+  // !TODO: Thay thế nếu cần
   const contactInfo = [
     {
       icon: MapPin,
@@ -107,6 +108,7 @@ const Contact: React.FC = () => {
                 <h3 className="text-lg font-medium text-gray-900 mb-4">
                   Kết nối với chúng tôi
                 </h3>
+                {/* !TODO: Thay thế để hiển thị các icon */}
                 <div className="flex space-x-4">
                   {["facebook", "twitter", "instagram", "linkedin"].map(
                     (social) => (
@@ -251,7 +253,7 @@ const Contact: React.FC = () => {
               hồ cá Koi
             </p>
           </div>
-          {/* Add Google Map integration here */}
+          {/* TODO: Add Google Map integration here */}
           <div className="h-96 bg-gray-200 rounded-lg">
             {/* Map placeholder */}
             <div className="w-full h-full flex items-center justify-center text-gray-500">
