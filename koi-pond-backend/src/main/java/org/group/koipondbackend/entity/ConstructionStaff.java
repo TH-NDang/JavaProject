@@ -1,19 +1,30 @@
 package org.group.koipondbackend.entity;
 
 import jakarta.persistence.Column;
-import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import jakarta.persistence.PrimaryKeyJoinColumn;
+import jakarta.persistence.Table;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.experimental.SuperBuilder;
+import java.time.LocalDate;
 
-@EqualsAndHashCode(callSuper = true)
 @Entity
-@DiscriminatorValue("CONSTRUCTION")
-@Data
+@Table(name = "construction_staff")
+@PrimaryKeyJoinColumn(name = "staff_id")
+@Getter
+@Setter
 @NoArgsConstructor
+@SuperBuilder
 public class ConstructionStaff extends Staff {
 
-    @Column(name = "construction_skills")
-    private String constructionSkills;
+    @Column(name = "certification")
+    private String certification;
+
+    @Column(name = "equipment_expertise")
+    private String equipmentExpertise;
+
+    @Column(name = "safety_training")
+    private LocalDate safetyTrainingExpiry;
 }

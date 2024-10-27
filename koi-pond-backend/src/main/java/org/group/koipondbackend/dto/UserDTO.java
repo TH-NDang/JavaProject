@@ -6,7 +6,7 @@ import lombok.experimental.FieldDefaults;
 
 @Data
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public abstract class UserDTO {
+public class UserDTO {
     Long id;
     String username;
     String fullName;
