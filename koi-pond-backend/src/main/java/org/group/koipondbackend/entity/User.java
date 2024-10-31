@@ -2,9 +2,7 @@ package org.group.koipondbackend.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-
 import lombok.experimental.SuperBuilder;
-
 import org.group.koipondbackend.entity.enums.Role;
 import java.time.LocalDateTime;
 
@@ -40,6 +38,9 @@ public class User {
     @Column(nullable = false)
     private Role role;
 
+    @Column(nullable = false)
+    private String status; // Thêm trường status
+
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 
@@ -50,6 +51,9 @@ public class User {
     protected void onCreate() {
         createdAt = LocalDateTime.now();
         updatedAt = LocalDateTime.now();
+        if (status == null) {
+            status = "ACTIVE";
+        }
     }
 
     @PreUpdate

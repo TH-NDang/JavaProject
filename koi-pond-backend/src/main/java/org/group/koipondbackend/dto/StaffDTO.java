@@ -1,5 +1,7 @@
 package org.group.koipondbackend.dto;
 
+import org.group.koipondbackend.dto.user.UserDTO;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
