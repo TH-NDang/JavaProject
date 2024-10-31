@@ -1,13 +1,13 @@
 package org.group.koipondbackend.repository;
 
-import java.util.Optional;
-
 import org.group.koipondbackend.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
+import java.util.Optional;
 
 @Repository
-public interface UserRepository<T extends User> extends JpaRepository<T, Long> {
+public interface UserRepository extends JpaRepository<User, Long>, JpaSpecificationExecutor<User> {
     Optional<User> findByEmail(String email);
 
     boolean existsByEmail(String email);

@@ -19,7 +19,7 @@ import org.springframework.stereotype.Service;
 public class AuthService {
     private final AuthenticationManager authenticationManager;
     private final JwtTokenProvider tokenProvider;
-    private final UserRepository<User> userRepository;
+    private final UserRepository userRepository;
 
     public LoginResponse login(LoginRequest request) {
         log.debug("Attempting login for user: {}", request.getEmail());
