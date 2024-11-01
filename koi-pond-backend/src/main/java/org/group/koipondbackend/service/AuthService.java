@@ -9,43 +9,52 @@ import org.group.koipondbackend.entity.User;
 import org.group.koipondbackend.repository.UserRepository;
 import org.group.koipondbackend.security.JwtTokenProvider;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
-@RequiredArgsConstructor
 @Slf4j
 public class AuthService {
     private final AuthenticationManager authenticationManager;
     private final JwtTokenProvider tokenProvider;
-    private final UserRepository<User> userRepository;
+    private final UserRepository userRepository;
+
+    public AuthService(AuthenticationManager authenticationManager,
+            JwtTokenProvider tokenProvider,
+            UserRepository userRepository) {
+        this.authenticationManager = authenticationManager;
+        this.tokenProvider = tokenProvider;
+        this.userRepository = userRepository;
+    }
 
     public LoginResponse login(LoginRequest request) {
-        log.debug("Attempting login for user: {}", request.getEmail());
+        try {
+            Authentication authentication = authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword()));
 
-        // Authenticate user
-        Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(
-                        request.getEmail(),
-                        request.getPassword()));
+            SecurityContextHolder.getContext().setAuthentication(authentication);
 
-        // Get user from database
-        User user = userRepository.findByEmail(request.getEmail())
-                .orElseThrow(() -> new RuntimeException("User not found: " + request.getEmail()));
+            User user = userRepository.findByEmail(request.getEmail())
+                    .orElseThrow(() -> new UsernameNotFoundException("User not found"));
 
-        // Generate token
-        String jwt = tokenProvider.generateToken(user);
+            String token = tokenProvider.generateToken(user);
 
-        // Create user info
-        UserInfo userInfo = new UserInfo();
-        userInfo.setId(user.getId());
-        userInfo.setEmail(user.getEmail());
-        userInfo.setFullName(user.getFullName());
-        userInfo.setRole(user.getRole());
-
-        log.debug("Login successful for user: {}", request.getEmail());
-
-        return new LoginResponse(jwt, userInfo);
+            return LoginResponse.builder()
+                    .token(token)
+                    .user(UserInfo.builder()
+                            .id(user.getId())
+                            .email(user.getEmail())
+                            .fullName(user.getFullName())
+                            .role(user.getRole())
+                            .build())
+                    .build();
+        } catch (AuthenticationException e) {
+            throw new BadCredentialsException("Invalid email/password");
+        }
     }
 }

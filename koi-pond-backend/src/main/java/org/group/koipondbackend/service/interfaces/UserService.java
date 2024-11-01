@@ -1,6 +1,6 @@
 package org.group.koipondbackend.service.interfaces;
 
-import org.group.koipondbackend.dto.UserDTO;
+import org.group.koipondbackend.dto.user.UserDTO;
 import org.group.koipondbackend.entity.User;
 
 import java.util.List;
