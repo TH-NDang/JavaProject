@@ -1,18 +1,12 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
+import { User, AuthUser } from "../types/auth";
 import api from "../config/axios";
-
-interface User {
-  id: number;
-  email: string;
-  fullName: string;
-  role: "ADMIN" | "STAFF" | "CUSTOMER";
-}
 
 interface AuthContextType {
   user: User | null;
   loading: boolean;
   error: string | null;
-  login: (email: string, password: string) => Promise<User>;
+  login: (email: string, password: string) => Promise<void>;
   logout: () => void;
 }
 
@@ -27,14 +21,9 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
 
   useEffect(() => {
     const checkAuth = async () => {
-      const token = localStorage.getItem("token");
-      if (token) {
-        try {
-          const response = await api.get<User>("/auth/me");
-          setUser(response.data);
-        } catch (error) {
-          localStorage.removeItem("token");
-        }
+      const storedUser = localStorage.getItem("user");
+      if (storedUser) {
+        setUser(JSON.parse(storedUser));
       }
       setLoading(false);
     };
@@ -42,24 +31,23 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
     checkAuth();
   }, []);
 
-  const login = async (email: string, password: string): Promise<User> => {
+  const login = async (email: string, password: string): Promise<void> => {
     try {
       setError(null);
       setLoading(true);
 
-      const response = await api.post<{
-        token: string;
-        user: User;
-      }>("/auth/login", {
-        email,
-        password,
-      });
+      const response = await api.post<{ token: string; user: User }>(
+        "/api/auth/login",
+        {
+          email,
+          password,
+        }
+      );
 
       const { token, user } = response.data;
-      localStorage.setItem("token", token);
+      localStorage.setItem("auth_token", token);
+      localStorage.setItem("user", JSON.stringify(user));
       setUser(user);
-
-      return user;
     } catch (err: any) {
       const errorMessage = err.response?.data?.message || "Đăng nhập thất bại";
       setError(errorMessage);
@@ -70,7 +58,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   };
 
   const logout = () => {
-    localStorage.removeItem("token");
+    localStorage.removeItem("auth_token");
+    localStorage.removeItem("user");
     setUser(null);
   };
 

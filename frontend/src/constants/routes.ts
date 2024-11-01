@@ -1,3 +1,5 @@
+import { UserRole } from "../types/auth";
+
 export const ROUTES = {
   // Public routes
   HOME: "/",
@@ -40,13 +42,11 @@ export const ROUTES = {
   },
 } as const;
 
-export const USER_ROLES = {
+export const USER_ROLES: Record<UserRole, UserRole> = {
   ADMIN: "ADMIN",
   STAFF: "STAFF",
   CUSTOMER: "CUSTOMER",
-} as const;
-
-export type UserRole = keyof typeof USER_ROLES;
+};
 
 export const ORDER_STATUS = {
   PENDING: "PENDING",

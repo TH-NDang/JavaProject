@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Eye, EyeOff, LogIn } from 'lucide-react';
-import { useAuth } from '../../../contexts/AuthContext';
+import { Eye, EyeOff, LogIn } from "lucide-react";
+import { useAuth } from "../../../contexts/AuthContext";
+
+import { toast } from "react-toastify";
 
 const Login: React.FC = () => {
   const [form, setForm] = useState({
-    email: '',
-    password: '',
+    email: "",
+    password: "",
   });
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -14,10 +16,9 @@ const Login: React.FC = () => {
   const navigate = useNavigate();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setForm(prev => ({
+    setForm((prev) => ({
       ...prev,
-      [name]: value,
+      [e.target.name]: e.target.value,
     }));
   };
 
@@ -26,23 +27,32 @@ const Login: React.FC = () => {
     setLoading(true);
 
     try {
-      const user = await login(form.email, form.password);
-      // Chuyển hướng dựa vào role
+      await login(form.email, form.password);
+
+      // Get updated user info from localStorage
+      const userStr = localStorage.getItem("user");
+      if (!userStr) throw new Error("User information not found");
+
+      const user = JSON.parse(userStr);
+      toast.success("Đăng nhập thành công");
+
+      // Redirect based on role
       switch (user.role) {
-        case 'ADMIN':
-          navigate('/admin/dashboard');
+        case "ADMIN":
+          navigate("/admin/dashboard");
           break;
-        case 'STAFF':
-          navigate('/staff/dashboard');
+        case "STAFF":
+          navigate("/staff/dashboard");
           break;
-        case 'CUSTOMER':
-          navigate('/customer/dashboard');
+        case "CUSTOMER":
+          navigate("/customer/dashboard");
           break;
         default:
-          navigate('/');
+          navigate("/");
       }
-    } catch (err) {
-      console.error('Login error:', err);
+    } catch (error: any) {
+      console.error("Login error:", error);
+      toast.error(error.message || "Đăng nhập thất bại");
     } finally {
       setLoading(false);
     }
