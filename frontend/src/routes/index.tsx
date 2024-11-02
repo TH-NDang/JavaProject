@@ -26,6 +26,7 @@ import AdminSettings from "../pages/admin/Settings";
 // Guards
 import PrivateRoute from "../components/guards/PrivateRoute";
 import RoleRoute from "../components/guards/RoleRoute";
+import AdminContacts from "../pages/admin/Contacts";
 const AppRoutes = () => {
   const { user, loading } = useAuth();
 
@@ -97,6 +98,7 @@ const AppRoutes = () => {
         <Route index element={<Navigate to="dashboard" replace />} />
         <Route path="dashboard" element={<AdminDashboard />} />
         <Route path="users" element={<AdminUsers />} />
+        <Route path="contacts" element={<AdminContacts />} />
         <Route path="orders" element={<AdminOrders />} />
         <Route path="schedule" element={<AdminSchedule />} />
         <Route path="reports" element={<AdminReports />} />

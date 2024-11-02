@@ -14,6 +14,7 @@ import {
   Calendar,
   BarChart2,
   Home,
+  MessageSquare,
 } from "lucide-react";
 
 const menuItems = [
@@ -26,6 +27,11 @@ const menuItems = [
     icon: Users,
     label: "Quản lý người dùng",
     path: "/admin/users",
+  },
+  {
+    icon: MessageSquare,
+    label: "Quản lý liên hệ",
+    path: "/admin/contacts",
   },
   {
     icon: FileText,

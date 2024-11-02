@@ -1,41 +1,8 @@
 import React, { useState } from "react";
-import { MapPin, Phone, Mail, Clock, MessageSquare, Send } from "lucide-react";
-
-interface ContactForm {
-  name: string;
-  email: string;
-  phone: string;
-  subject: string;
-  message: string;
-}
+import { MapPin, Phone, Mail, Clock } from "lucide-react";
+import ContactForm from "../../../components/public/ContactForm";
 
 const Contact: React.FC = () => {
-  const [form, setForm] = useState<ContactForm>({
-    name: "",
-    email: "",
-    phone: "",
-    subject: "",
-    message: "",
-  });
-
-  const handleChange = (
-    e: React.ChangeEvent<
-      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-    >
-  ) => {
-    const { name, value } = e.target;
-    setForm((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // Xử lý gửi form ở đây
-    console.log(form);
-  };
-
   // !TODO: Thay thế nếu cần
   const contactInfo = [
     {
@@ -102,141 +69,13 @@ const Contact: React.FC = () => {
                   );
                 })}
               </div>
-
-              {/* Social Links */}
-              <div className="mt-8">
-                <h3 className="text-lg font-medium text-gray-900 mb-4">
-                  Kết nối với chúng tôi
-                </h3>
-                {/* !TODO: Thay thế để hiển thị các icon */}
-                <div className="flex space-x-4">
-                  {["facebook", "twitter", "instagram", "linkedin"].map(
-                    (social) => (
-                      <a
-                        key={social}
-                        href={`#${social}`}
-                        className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center text-gray-600 hover:bg-primary-100 hover:text-primary-600 transition duration-300"
-                      >
-                        <span className="sr-only">{social}</span>
-                        {/* Add social icons here */}
-                      </a>
-                    )
-                  )}
-                </div>
-              </div>
             </div>
 
             {/* Contact Form */}
             <div className="lg:col-span-2">
               <div className="bg-white rounded-lg shadow-lg p-8">
                 <h2 className="text-2xl font-bold mb-6">Gửi Tin Nhắn</h2>
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                      <label
-                        htmlFor="name"
-                        className="block text-sm font-medium text-gray-700"
-                      >
-                        Họ và tên
-                      </label>
-                      <input
-                        type="text"
-                        id="name"
-                        name="name"
-                        value={form.name}
-                        onChange={handleChange}
-                        className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500"
-                        required
-                      />
-                    </div>
-                    <div>
-                      <label
-                        htmlFor="email"
-                        className="block text-sm font-medium text-gray-700"
-                      >
-                        Email
-                      </label>
-                      <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        value={form.email}
-                        onChange={handleChange}
-                        className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500"
-                        required
-                      />
-                    </div>
-                  </div>
-
-                  <div>
-                    <label
-                      htmlFor="phone"
-                      className="block text-sm font-medium text-gray-700"
-                    >
-                      Số điện thoại
-                    </label>
-                    <input
-                      type="tel"
-                      id="phone"
-                      name="phone"
-                      value={form.phone}
-                      onChange={handleChange}
-                      className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500"
-                      required
-                    />
-                  </div>
-
-                  <div>
-                    <label
-                      htmlFor="subject"
-                      className="block text-sm font-medium text-gray-700"
-                    >
-                      Chủ đề
-                    </label>
-                    <select
-                      id="subject"
-                      name="subject"
-                      value={form.subject}
-                      onChange={handleChange}
-                      className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500"
-                      required
-                    >
-                      <option value="">Chọn chủ đề</option>
-                      <option value="design">Tư vấn thiết kế</option>
-                      <option value="construction">Thi công hồ cá</option>
-                      <option value="maintenance">Bảo trì định kỳ</option>
-                      <option value="other">Khác</option>
-                    </select>
-                  </div>
-
-                  <div>
-                    <label
-                      htmlFor="message"
-                      className="block text-sm font-medium text-gray-700"
-                    >
-                      Nội dung tin nhắn
-                    </label>
-                    <textarea
-                      id="message"
-                      name="message"
-                      rows={4}
-                      value={form.message}
-                      onChange={handleChange}
-                      className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500"
-                      required
-                    />
-                  </div>
-
-                  <div>
-                    <button
-                      type="submit"
-                      className="w-full flex justify-center items-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 transition duration-300"
-                    >
-                      Gửi tin nhắn
-                      <Send className="ml-2 h-5 w-5" />
-                    </button>
-                  </div>
-                </form>
+                <ContactForm />
               </div>
             </div>
           </div>
