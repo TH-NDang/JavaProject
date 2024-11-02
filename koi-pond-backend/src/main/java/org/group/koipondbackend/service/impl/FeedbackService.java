@@ -55,6 +55,7 @@ public class FeedbackService {
         return false;
     }
 
+    // Truy xuất phản hồi của khách hàng cụ thể mà không liên quan đến User
     public List<FeedbackDTO> getFeedbacksByCustomerId(Long customerId) {
         List<Feedback> feedbacks = feedbackRepository.findByCustomerId(customerId);
         return feedbackMapper.toDtoList(feedbacks);

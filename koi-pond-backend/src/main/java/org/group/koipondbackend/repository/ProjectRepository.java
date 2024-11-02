@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ProjectRepository extends JpaRepository<Project, Long> {
-    // Có thể thêm các phương thức truy vấn tùy chỉnh tại đây
+    // No custom methods needed
 }

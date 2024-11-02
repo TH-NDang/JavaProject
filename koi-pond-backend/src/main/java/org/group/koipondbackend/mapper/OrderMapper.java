@@ -33,10 +33,4 @@ public class OrderMapper {
         entity.setAmount(dto.getAmount());
         return entity;
     }
-
-    public List<OrderDTO> toDtoList(List<Order> orders) {
-        return orders.stream()
-                .map(this::toDto)
-                .collect(Collectors.toList());
-    }
 }

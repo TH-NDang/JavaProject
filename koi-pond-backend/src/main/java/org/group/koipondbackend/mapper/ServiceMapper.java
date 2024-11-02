@@ -1,7 +1,7 @@
 package org.group.koipondbackend.mapper;
 
 import org.group.koipondbackend.dto.ServiceDTO;
-import org.group.koipondbackend.entity.Service;
+import org.group.koipondbackend.entity.Services;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -10,31 +10,20 @@ import java.util.stream.Collectors;
 @Component
 public class ServiceMapper {
 
-    public ServiceDTO toDto(Service entity) {
-        if (entity == null) {
-            return null;
-        }
-        ServiceDTO dto = new ServiceDTO();
-        dto.setId(entity.getId());
-        dto.setName(entity.getName());
-        dto.setDescription(entity.getDescription());
-        return dto;
+    public ServiceDTO toDto(Services s) {
+        return new ServiceDTO(s.getId(), s.getName(), s.getDescription(), s.getPrice());
     }
 
-    public Service toEntity(ServiceDTO dto) {
-        if (dto == null) {
-            return null;
-        }
-        Service entity = new Service();
-        entity.setId(dto.getId());
-        entity.setName(dto.getName());
-        entity.setDescription(dto.getDescription());
-        return entity;
+    public Services toEntity(ServiceDTO dto) {
+        Services s = new Services();
+        s.setId(dto.getId());
+        s.setName(dto.getName());
+        s.setDescription(dto.getDescription());
+        s.setPrice(dto.getPrice());
+        return s;
     }
 
-    public List<ServiceDTO> toDtoList(List<Service> services) {
-        return services.stream()
-                .map(this::toDto)
-                .collect(Collectors.toList());
+    public List<ServiceDTO> toDtoList(List<Services> services) {
+        return services.stream().map(this::toDto).collect(Collectors.toList());
     }
 }

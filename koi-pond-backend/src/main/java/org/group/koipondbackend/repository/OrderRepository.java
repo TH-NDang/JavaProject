@@ -8,5 +8,4 @@ import java.util.List;
 
 @Repository
 public interface OrderRepository extends JpaRepository<Order, Long> {
-    List<Order> findByProjectId(Long projectId); // Tìm kiếm đơn hàng theo projectId
 }

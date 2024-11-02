@@ -40,9 +40,11 @@ public class ProjectService {
 
     public Optional<ProjectDTO> updateProject(Long id, ProjectDTO projectDTO) {
         return projectRepository.findById(id)
-                .map(project -> {
-                    // Cập nhật thông tin dự án
-                    return projectMapper.toDto(projectRepository.save(project));
+                .map(existingProject -> {
+                    Project updatedProject = projectMapper.toEntity(projectDTO);
+                    updatedProject.setId(existingProject.getId());
+                    projectRepository.save(updatedProject);
+                    return projectMapper.toDto(updatedProject);
                 });
     }
 

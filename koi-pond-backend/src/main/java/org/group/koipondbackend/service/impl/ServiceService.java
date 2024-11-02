@@ -1,55 +1,29 @@
 package org.group.koipondbackend.service.impl;
 
 import org.group.koipondbackend.dto.ServiceDTO;
-import org.group.koipondbackend.entity.Service;
 import org.group.koipondbackend.mapper.ServiceMapper;
 import org.group.koipondbackend.repository.ServiceRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
-@org.springframework.stereotype.Service
+
+@Service
 public class ServiceService {
 
-    private final ServiceRepository serviceRepository;
-    private final ServiceMapper serviceMapper;
+    private final ServiceRepository repository;
+    private final ServiceMapper mapper;
 
-    @Autowired
-    public ServiceService(ServiceRepository serviceRepository, ServiceMapper serviceMapper) {
-        this.serviceRepository = serviceRepository;
-        this.serviceMapper = serviceMapper;
+    public ServiceService(ServiceRepository repository, ServiceMapper mapper) {
+        this.repository = repository;
+        this.mapper = mapper;
     }
 
-    public List<ServiceDTO> getAllServices() {
-        List<Service> services = serviceRepository.findAll();
-        return serviceMapper.toDtoList(services);
+    public ServiceDTO create(ServiceDTO dto) { return mapper.toDto(repository.save(mapper.toEntity(dto))); }
+    public ServiceDTO findById(Long id) { return mapper.toDto(repository.findById(id).orElse(null)); }
+    public List<ServiceDTO> findAll() { return mapper.toDtoList(repository.findAll()); }
+    public ServiceDTO update(Long id, ServiceDTO dto) {
+        dto.setId(id);
+        return mapper.toDto(repository.save(mapper.toEntity(dto)));
     }
-
-    public Optional<ServiceDTO> getServiceById(Long id) {
-        return serviceRepository.findById(id)
-                .map(serviceMapper::toDto);
-    }
-
-    public ServiceDTO createService(ServiceDTO serviceDTO) {
-        Service service = serviceMapper.toEntity(serviceDTO);
-        Service savedService = serviceRepository.save(service);
-        return serviceMapper.toDto(savedService);
-    }
-
-    public Optional<ServiceDTO> updateService(Long id, ServiceDTO serviceDTO) {
-        return serviceRepository.findById(id)
-                .map(service -> {
-                    service.setName(serviceDTO.getName());
-                    service.setDescription(serviceDTO.getDescription());
-                    return serviceMapper.toDto(serviceRepository.save(service));
-                });
-    }
-
-    public boolean deleteService(Long id) {
-        if (serviceRepository.existsById(id)) {
-            serviceRepository.deleteById(id);
-            return true;
-        }
-        return false;
-    }
+    public void delete(Long id) { repository.deleteById(id); }
 }

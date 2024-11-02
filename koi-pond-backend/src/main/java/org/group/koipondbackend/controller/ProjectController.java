@@ -1,14 +1,11 @@
 package org.group.koipondbackend.controller;
 
 import org.group.koipondbackend.dto.ProjectDTO;
-import org.group.koipondbackend.dto.OrderDTO; // Nhập OrderDTO
-import org.group.koipondbackend.service.impl.OrderService; // Nhập OrderService
 import org.group.koipondbackend.service.impl.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -16,12 +13,10 @@ import java.util.List;
 public class ProjectController {
 
     private final ProjectService projectService;
-    private final OrderService orderService; // Khai báo OrderService
 
     @Autowired
-    public ProjectController(ProjectService projectService, OrderService orderService) {
+    public ProjectController(ProjectService projectService) {
         this.projectService = projectService;
-        this.orderService = orderService; // Inject OrderService
     }
 
     @GetMapping
@@ -39,14 +34,13 @@ public class ProjectController {
     @PostMapping
     public ResponseEntity<ProjectDTO> createProject(@RequestBody ProjectDTO projectDTO) {
         ProjectDTO createdProject = projectService.createProject(projectDTO);
-        return ResponseEntity.created(URI.create("/api/projects/" + createdProject.getId()))
-                .body(createdProject);
+        return ResponseEntity.ok(createdProject);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<ProjectDTO> updateProject(@PathVariable Long id, @RequestBody ProjectDTO projectDTO) {
         return projectService.updateProject(id, projectDTO)
-                .map(updatedProject -> ResponseEntity.ok(updatedProject))
+                .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
@@ -57,10 +51,5 @@ public class ProjectController {
         } else {
             return ResponseEntity.notFound().build();
         }
-    }
-
-    @GetMapping("/{id}/orders")
-    public List<OrderDTO> getOrdersByProjectId(@PathVariable Long id) {
-        return orderService.getOrdersByProjectId(id); // Sử dụng orderService
     }
 }
