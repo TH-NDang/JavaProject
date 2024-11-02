@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { Search, Filter, Eye, Download } from "lucide-react";
-import { toast } from "react-toastify";
+import { Toast } from "../../../services/toast.service";
 import { ContactService } from "../../../services/api/contact.service";
 import { Contact, ContactStatus, CONTACT_STATUS } from "../../../types/contact";
 import DataTable from "../../../components/common/DataTable";
@@ -33,7 +33,7 @@ export default function AdminContacts() {
       setTotalPages(response.totalPages);
     } catch (error) {
       console.error("Error fetching contacts:", error);
-      toast.error("Không thể tải danh sách liên hệ");
+      Toast.error("Không thể tải danh sách liên hệ");
     } finally {
       setLoading(false);
     }
@@ -45,7 +45,7 @@ export default function AdminContacts() {
 
   const handleExportExcel = () => {
     // TODO: Implement export to Excel functionality
-    toast.info("Tính năng đang được phát triển");
+    Toast.info("Tính năng đang được phát triển");
   };
 
   const columns: Column<Contact>[] = [

@@ -1,5 +1,5 @@
 import axios from "axios";
-import { toast } from "react-toastify";
+import { Toast } from "../services/toast.service";
 
 const API_URL = "http://localhost:8080";
 
@@ -25,7 +25,7 @@ axiosInstance.interceptors.response.use(
   (response) => response,
   (error) => {
     const message = error.response?.data?.message || "Có lỗi xảy ra";
-    toast.error(message);
+    Toast.error(message);
     return Promise.reject(error);
   }
 );

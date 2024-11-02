@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { X } from "lucide-react";
 import { Contact, ContactStatus, CONTACT_STATUS } from "../../types/contact";
 import { ContactService } from "../../services/api/contact.service";
-import { toast } from "react-toastify";
+import { Toast } from "../../services/toast.service";
 
 interface ContactDetailModalProps {
   contact: Contact;
@@ -27,12 +27,12 @@ export const ContactDetailModal: React.FC<ContactDetailModalProps> = ({
         status,
         notes,
       });
-      toast.success("Cập nhật thông tin liên hệ thành công");
+      Toast.success("Cập nhật thông tin liên hệ thành công");
       onUpdate();
       onClose();
     } catch (error) {
       console.error("Error updating contact:", error);
-      toast.error("Không thể cập nhật thông tin liên hệ");
+      Toast.error("Không thể cập nhật thông tin liên hệ");
     } finally {
       setLoading(false);
     }

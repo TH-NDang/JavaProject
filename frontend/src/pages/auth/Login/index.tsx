@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { Eye, EyeOff, LogIn } from "lucide-react";
 import { useAuth } from "../../../contexts/AuthContext";
 
-import { toast } from "react-toastify";
+import { Toast } from "../../../services/toast.service";
 
 const Login: React.FC = () => {
   const [form, setForm] = useState({
@@ -34,7 +34,7 @@ const Login: React.FC = () => {
       if (!userStr) throw new Error("User information not found");
 
       const user = JSON.parse(userStr);
-      toast.success("Đăng nhập thành công");
+      Toast.success("Đăng nhập thành công");
 
       // Redirect based on role
       switch (user.role) {
@@ -52,7 +52,7 @@ const Login: React.FC = () => {
       }
     } catch (error: any) {
       console.error("Login error:", error);
-      toast.error(error.message || "Đăng nhập thất bại");
+      Toast.error(error.message || "Đăng nhập thất bại");
     } finally {
       setLoading(false);
     }

@@ -1,14 +1,19 @@
 import { BrowserRouter } from "react-router-dom";
 import { AuthProvider } from "./contexts/AuthContext";
 import AppRoutes from "./routes";
-import { ToastContainer } from "react-toastify";
+import { Toaster } from "sonner";
 
 const App = () => {
   return (
     <BrowserRouter>
       <AuthProvider>
         <AppRoutes />
-        <ToastContainer />
+        <Toaster
+          position="top-center"
+          expand={false}
+          richColors
+          duration={4000}
+        />
       </AuthProvider>
     </BrowserRouter>
   );

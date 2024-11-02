@@ -3,7 +3,7 @@ import { UserService } from "../../../services/api/user.service";
 import { User, CreateUserRequest, UpdateUserRequest } from "../../../types/user";
 import { UserPlus, Search, Filter } from "lucide-react";
 import DataTable from "../../../components/common/DataTable";
-import { toast } from "react-toastify";
+import { Toast } from "../../../services/toast.service";
 import { CreateUserModal } from "../../../components/modals/CreateUserModal";
 import { UpdateUserModal } from "../../../components/modals/UpdateUserModal";
 import { ApiError } from "../../../types/error";
@@ -36,7 +36,7 @@ export default function AdminUsers() {
       setTotalPages(response.totalPages);
     } catch (error) {
       console.error("Error fetching users:", error);
-      toast.error("Failed to fetch users");
+      Toast.error("Failed to fetch users");
     } finally {
       setLoading(false);
     }
@@ -49,51 +49,51 @@ export default function AdminUsers() {
   const handleCreateUser = async (data: CreateUserRequest) => {
     try {
       await UserService.createUser(data);
-      toast.success("User created successfully");
+      Toast.success("User created successfully");
       fetchUsers();
       setIsCreateModalOpen(false);
     } catch (error) {
       console.error("Error creating user:", error);
-      toast.error("Failed to create user");
+      Toast.error("Failed to create user");
     }
   };
 
   const handleUpdateUser = async (id: number, data: UpdateUserRequest) => {
     try {
       await UserService.updateUser(id, data);
-      toast.success("User updated successfully");
+      Toast.success("User updated successfully");
       fetchUsers();
       setIsUpdateModalOpen(false);
       setSelectedUser(null);
     } catch (error) {
       console.error("Error updating user:", error);
-      toast.error("Failed to update user");
+      Toast.error("Failed to update user");
     }
   };
 
   const handleUpdateStatus = async (id: number, status: string) => {
     try {
       await UserService.updateUserStatus(id, status);
-      toast.success("User status updated successfully");
+      Toast.success("User status updated successfully");
       fetchUsers();
     } catch (error) {
       console.error("Error updating user status:", error);
-      toast.error("Failed to update user status");
+      Toast.error("Failed to update user status");
     }
   };
 
   const handleDeleteUser = async (id: number) => {
     try {
       await UserService.deleteUser(id);
-      toast.success("User deleted successfully");
+      Toast.success("User deleted successfully");
       fetchUsers();
     } catch (err) {
       const error = err as ApiError;
       console.error("Error deleting user:", error);
       if (error.response?.status === 400) {
-        toast.error(error.response.data.message || "Cannot delete this user");
+        Toast.error(error.response.data.message || "Cannot delete this user");
       } else {
-        toast.error("Failed to delete user");
+        Toast.error("Failed to delete user");
       }
     }
   };
