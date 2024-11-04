@@ -1,20 +1,28 @@
 package org.group.koipondbackend.entity;
 
-import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.experimental.SuperBuilder;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 
-@EqualsAndHashCode(callSuper = true)
+import java.time.LocalDateTime;
+
 @Entity
 @Table(name = "staff")
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "staff_type")
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
-@AllArgsConstructor
-public abstract class Staff extends User {
-    private String employeeId;
+@SuperBuilder
+public class Staff extends User {
+    @Column(name = "department")
     private String department;
+
+    @Column(name = "join_date")
+    private LocalDateTime joinDate;
+
+    @Column(name = "status")
+    private String status; // ACTIVE, INACTIVE, ON_LEAVE, etc.
 }
