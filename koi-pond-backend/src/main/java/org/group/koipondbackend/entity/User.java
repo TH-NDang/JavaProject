@@ -1,29 +1,63 @@
 package org.group.koipondbackend.entity;
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Data;
-import lombok.experimental.FieldDefaults;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
+import org.group.koipondbackend.entity.enums.Role;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "users")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@SuperBuilder
 @Inheritance(strategy = InheritanceType.JOINED)
-@Data
-@FieldDefaults(level = AccessLevel.PRIVATE)
-public abstract class User {
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+    private Long id;
 
-    String username;
+    @Column(nullable = false, unique = true)
+    private String email;
 
-    @Column(name = "full_name")
-    String fullName;
-    String password;
+    @Column(nullable = false)
+    private String password;
 
-    @Column(unique = true)
-    String email;
+    @Column(name = "full_name", nullable = false)
+    private String fullName;
 
-    @Column(name = "phone_number")
-    String phoneNumber;
+    @Column
+    private String phone;
+
+    @Column
+    private String address;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private Role role;
+
+    @Column(nullable = false)
+    private String status; // Thêm trường status
+
+    @Column(name = "created_at")
+    private LocalDateTime createdAt;
+
+    @Column(name = "updated_at")
+    private LocalDateTime updatedAt;
+
+    @PrePersist
+    protected void onCreate() {
+        createdAt = LocalDateTime.now();
+        updatedAt = LocalDateTime.now();
+        if (status == null) {
+            status = "ACTIVE";
+        }
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        updatedAt = LocalDateTime.now();
+    }
 }
