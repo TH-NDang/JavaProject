@@ -2,22 +2,19 @@ package org.group.koipondbackend.controller;
 
 import org.group.koipondbackend.dto.ProjectDTO;
 import org.group.koipondbackend.service.impl.ProjectService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import lombok.RequiredArgsConstructor;
 
 import java.util.List;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/api/projects")
 public class ProjectController {
 
     private final ProjectService projectService;
-
-    @Autowired
-    public ProjectController(ProjectService projectService) {
-        this.projectService = projectService;
-    }
 
     @GetMapping
     public List<ProjectDTO> getAllProjects() {

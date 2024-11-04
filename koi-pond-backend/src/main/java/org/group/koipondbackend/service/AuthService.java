@@ -19,18 +19,11 @@ import org.springframework.stereotype.Service;
 
 @Service
 @Slf4j
+@RequiredArgsConstructor
 public class AuthService {
     private final AuthenticationManager authenticationManager;
     private final JwtTokenProvider tokenProvider;
     private final UserRepository userRepository;
-
-    public AuthService(AuthenticationManager authenticationManager,
-            JwtTokenProvider tokenProvider,
-            UserRepository userRepository) {
-        this.authenticationManager = authenticationManager;
-        this.tokenProvider = tokenProvider;
-        this.userRepository = userRepository;
-    }
 
     public LoginResponse login(LoginRequest request) {
         try {

@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 
 import java.time.LocalDateTime;
 
-import org.apache.coyote.BadRequestException;
 import org.group.koipondbackend.dto.auth.CreateUserRequest;
 import org.group.koipondbackend.dto.user.UpdateStatusRequest;
 import org.group.koipondbackend.dto.user.UpdateUserRequest;

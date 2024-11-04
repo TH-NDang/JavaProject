@@ -1,11 +1,15 @@
 package org.group.koipondbackend.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
-
+@Data
 @Entity
 @Table(name = "feedbacks")
+@AllArgsConstructor
+@NoArgsConstructor
 public class Feedback {
 
     @Id
@@ -15,20 +19,4 @@ public class Feedback {
     private Long customerId;
     private String content;
     private int rating;
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public int getRating() {
-        return rating;
-    }
-
-    public void setRating(int rating) {
-        this.rating = rating;
-    }
 }

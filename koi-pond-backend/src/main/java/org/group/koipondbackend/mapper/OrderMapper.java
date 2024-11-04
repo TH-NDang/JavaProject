@@ -2,35 +2,13 @@ package org.group.koipondbackend.mapper;
 
 import org.group.koipondbackend.dto.OrderDTO;
 import org.group.koipondbackend.entity.Order;
+import org.mapstruct.Mapper;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 @Component
-public class OrderMapper {
+@Mapper(componentModel = "spring")
+public interface OrderMapper {
+    OrderDTO toDto(Order order);
 
-    public OrderDTO toDto(Order entity) {
-        if (entity == null) {
-            return null;
-        }
-        OrderDTO dto = new OrderDTO();
-        dto.setId(entity.getId());
-        dto.setProjectId(entity.getProjectId());
-        dto.setOrderDetails(entity.getOrderDetails());
-        dto.setAmount(entity.getAmount());
-        return dto;
-    }
-
-    public Order toEntity(OrderDTO dto) {
-        if (dto == null) {
-            return null;
-        }
-        Order entity = new Order();
-        entity.setId(dto.getId());
-        entity.setProjectId(dto.getProjectId());
-        entity.setOrderDetails(dto.getOrderDetails());
-        entity.setAmount(dto.getAmount());
-        return entity;
-    }
+    Order toEntity(OrderDTO orderDTO);
 }

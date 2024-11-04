@@ -9,7 +9,10 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface FeedbackMapper {
     FeedbackDTO toDto(Feedback feedback);
+
     Feedback toEntity(FeedbackDTO feedbackDTO);
+
     List<FeedbackDTO> toDtoList(List<Feedback> feedbacks);
+
     List<Feedback> toEntityList(List<FeedbackDTO> feedbackDTOs);
 }
