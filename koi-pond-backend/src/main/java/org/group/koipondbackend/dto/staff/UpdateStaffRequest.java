@@ -1,4 +1,4 @@
-package org.group.koipondbackend.dto;
+package org.group.koipondbackend.dto.staff;
 
 import jakarta.validation.constraints.Email;
 import lombok.Data;

@@ -2,9 +2,9 @@ package org.group.koipondbackend.service.staff;
 
 import lombok.RequiredArgsConstructor;
 
-import org.group.koipondbackend.dto.CreateStaffRequest;
-import org.group.koipondbackend.dto.StaffDto;
-import org.group.koipondbackend.dto.UpdateStaffRequest;
+import org.group.koipondbackend.dto.staff.CreateStaffRequest;
+import org.group.koipondbackend.dto.staff.StaffDto;
+import org.group.koipondbackend.dto.staff.UpdateStaffRequest;
 import org.group.koipondbackend.entity.Staff;
 import org.group.koipondbackend.entity.enums.Role;
 import org.group.koipondbackend.exception.ResourceNotFoundException;

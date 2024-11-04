@@ -2,9 +2,9 @@ package org.group.koipondbackend.controller;
 
 import lombok.RequiredArgsConstructor;
 
-import org.group.koipondbackend.dto.CreateStaffRequest;
-import org.group.koipondbackend.dto.StaffDto;
-import org.group.koipondbackend.dto.UpdateStaffRequest;
+import org.group.koipondbackend.dto.staff.CreateStaffRequest;
+import org.group.koipondbackend.dto.staff.StaffDto;
+import org.group.koipondbackend.dto.staff.UpdateStaffRequest;
 import org.group.koipondbackend.service.staff.StaffService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
