@@ -2,21 +2,18 @@ package org.group.koipondbackend.controller;
 
 import org.group.koipondbackend.dto.FeedbackDTO;
 import org.group.koipondbackend.service.impl.FeedbackService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import lombok.RequiredArgsConstructor;
+
 import java.util.List;
 
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/feedbacks")
 public class FeedbackController {
     private final FeedbackService feedbackService;
-
-    @Autowired
-    public FeedbackController(FeedbackService feedbackService) {
-        this.feedbackService = feedbackService;
-    }
 
     @GetMapping
     public List<FeedbackDTO> getAllFeedbacks() {
@@ -44,7 +41,8 @@ public class FeedbackController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteFeedback(@PathVariable Long id) {
-        return feedbackService.deleteFeedback(id) ? ResponseEntity.noContent().build() : ResponseEntity.notFound().build();
+        return feedbackService.deleteFeedback(id) ? ResponseEntity.noContent().build()
+                : ResponseEntity.notFound().build();
     }
 
     @GetMapping("/customers/{customerId}")

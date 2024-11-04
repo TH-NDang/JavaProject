@@ -2,39 +2,20 @@ package org.group.koipondbackend.mapper;
 
 import org.group.koipondbackend.dto.ProjectDTO;
 import org.group.koipondbackend.entity.Project;
+import org.mapstruct.Mapper;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
-public class ProjectMapper {
+@Mapper(componentModel = "spring")
+public interface ProjectMapper {
+    ProjectDTO toDto(Project project);
 
-    public ProjectDTO toDto(Project entity) {
-        if (entity == null) {
-            return null;
-        }
-        ProjectDTO dto = new ProjectDTO();
-        dto.setId(entity.getId());
-        dto.setName(entity.getName());
-        dto.setDescription(entity.getDescription());
-        return dto;
-    }
+    Project toEntity(ProjectDTO projectDTO);
 
-    public Project toEntity(ProjectDTO dto) {
-        if (dto == null) {
-            return null;
-        }
-        Project entity = new Project();
-        entity.setId(dto.getId());
-        entity.setName(dto.getName());
-        entity.setDescription(dto.getDescription());
-        return entity;
-    }
-
-    public List<ProjectDTO> toDtoList(List<Project> projects) {
-        return projects.stream()
-                .map(this::toDto)
-                .collect(Collectors.toList());
+    default List<ProjectDTO> toDtoList(List<Project> projects) {
+        return projects.stream().map(this::toDto).collect(Collectors.toList());
     }
 }

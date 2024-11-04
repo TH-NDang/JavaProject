@@ -5,24 +5,19 @@ import org.group.koipondbackend.entity.Order;
 import org.group.koipondbackend.mapper.OrderMapper;
 import org.group.koipondbackend.repository.OrderRepository;
 import org.springframework.stereotype.Service;
+
+import lombok.RequiredArgsConstructor;
+
 import java.util.Optional;
 
-
-import lombok.AllArgsConstructor;
-
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class OrderService {
 
     private final OrderRepository orderRepository;
     private final OrderMapper orderMapper;
-
-    public OrderService(OrderRepository orderRepository, OrderMapper orderMapper) {
-        this.orderRepository = orderRepository;
-        this.orderMapper = orderMapper;
-    }
 
     public List<OrderDTO> getAllOrders() {
         return orderRepository.findAll().stream().map(orderMapper::toDto).toList();

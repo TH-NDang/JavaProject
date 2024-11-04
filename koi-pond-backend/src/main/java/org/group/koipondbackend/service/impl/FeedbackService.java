@@ -4,23 +4,19 @@ import org.group.koipondbackend.dto.FeedbackDTO;
 import org.group.koipondbackend.entity.Feedback;
 import org.group.koipondbackend.mapper.FeedbackMapper;
 import org.group.koipondbackend.repository.FeedbackRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import lombok.RequiredArgsConstructor;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class FeedbackService {
 
     private final FeedbackRepository feedbackRepository;
     private final FeedbackMapper feedbackMapper;
-
-    @Autowired
-    public FeedbackService(FeedbackRepository feedbackRepository, FeedbackMapper feedbackMapper) {
-        this.feedbackRepository = feedbackRepository;
-        this.feedbackMapper = feedbackMapper;
-    }
 
     public List<FeedbackDTO> getAllFeedbacks() {
         List<Feedback> feedbacks = feedbackRepository.findAll();

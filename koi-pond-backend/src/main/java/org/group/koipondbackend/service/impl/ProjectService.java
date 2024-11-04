@@ -4,23 +4,19 @@ import org.group.koipondbackend.dto.ProjectDTO;
 import org.group.koipondbackend.entity.Project;
 import org.group.koipondbackend.mapper.ProjectMapper;
 import org.group.koipondbackend.repository.ProjectRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import lombok.RequiredArgsConstructor;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class ProjectService {
 
     private final ProjectRepository projectRepository;
     private final ProjectMapper projectMapper;
-
-    @Autowired
-    public ProjectService(ProjectRepository projectRepository, ProjectMapper projectMapper) {
-        this.projectRepository = projectRepository;
-        this.projectMapper = projectMapper;
-    }
 
     public List<ProjectDTO> getAllProjects() {
         List<Project> projects = projectRepository.findAll();

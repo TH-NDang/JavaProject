@@ -2,28 +2,20 @@ package org.group.koipondbackend.mapper;
 
 import org.group.koipondbackend.dto.ServiceDTO;
 import org.group.koipondbackend.entity.Services;
+import org.mapstruct.Mapper;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
-public class ServiceMapper {
+@Mapper(componentModel = "spring")
+public interface ServiceMapper {
+    ServiceDTO toDto(Services services);
 
-    public ServiceDTO toDto(Services s) {
-        return new ServiceDTO(s.getId(), s.getName(), s.getDescription(), s.getPrice());
-    }
+    Services toEntity(ServiceDTO serviceDTO);
 
-    public Services toEntity(ServiceDTO dto) {
-        Services s = new Services();
-        s.setId(dto.getId());
-        s.setName(dto.getName());
-        s.setDescription(dto.getDescription());
-        s.setPrice(dto.getPrice());
-        return s;
-    }
-
-    public List<ServiceDTO> toDtoList(List<Services> services) {
+    default List<ServiceDTO> toDtoList(List<Services> services) {
         return services.stream().map(this::toDto).collect(Collectors.toList());
     }
 }
