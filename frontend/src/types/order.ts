@@ -20,6 +20,6 @@ export interface OrderStatusConfig {
   label: string;
   color: string;
 }
-
+export type OrderDTO = Order;
 // Sửa lại định nghĩa OrderStatusMap
 export type OrderStatusMap = Record<OrderStatus, OrderStatusConfig>;
