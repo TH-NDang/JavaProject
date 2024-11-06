@@ -22,11 +22,11 @@ import AdminOrders from "../pages/admin/Orders";
 import AdminSchedule from "../pages/admin/Schedule";
 import AdminReports from "../pages/admin/Reports";
 import AdminSettings from "../pages/admin/Settings";
-
+import AdminContacts from "../pages/admin/Contacts"; // Added AdminContacts import
 // Guards
 import PrivateRoute from "../components/guards/PrivateRoute";
 import RoleRoute from "../components/guards/RoleRoute";
-import AdminContacts from "../pages/admin/Contacts";
+
 const AppRoutes = () => {
   const { user, loading } = useAuth();
 

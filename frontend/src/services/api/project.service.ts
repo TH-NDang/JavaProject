@@ -61,4 +61,13 @@ export class ProjectService {
             throw error;
         }
     }
+    static async getFeaturedProjects(): Promise<ProjectDTO[]> {
+        try {
+            const response = await axios.get<ProjectDTO[]>('/api/featured-projects');
+            return response.data;
+        } catch (error) {
+            console.error('Failed to fetch featured projects', error);
+            throw error;
+        }
+    }
 }
