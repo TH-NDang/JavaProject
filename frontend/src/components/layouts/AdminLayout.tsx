@@ -15,6 +15,8 @@ import {
   BarChart2,
   Home,
   MessageSquare,
+  Wrench,
+  Store,
 } from "lucide-react";
 
 const menuItems = [
@@ -37,6 +39,16 @@ const menuItems = [
     icon: FileText,
     label: "Quản lý đơn hàng",
     path: "/admin/orders",
+  },
+  {
+    icon: Store,
+    label: "Quản lý dịch vụ",
+    path: "/admin/services",
+  },
+  {
+    icon: Wrench,
+    label: "Quản lý Bảo trì",
+    path: "/admin/maintenance",
   },
   {
     icon: Calendar,

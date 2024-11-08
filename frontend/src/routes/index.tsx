@@ -19,7 +19,9 @@ import Login from "../pages/auth/Login";
 import AdminDashboard from "../pages/admin/Dashboard";
 import AdminUsers from "../pages/admin/Users";
 import AdminOrders from "../pages/admin/Orders";
+import AdminServices from "../pages/admin/Services";
 import AdminSchedule from "../pages/admin/Schedule";
+import MaintenanceManagement from "../pages/admin/Maintenance";
 import AdminReports from "../pages/admin/Reports";
 import AdminSettings from "../pages/admin/Settings";
 import AdminContacts from "../pages/admin/Contacts"; // Added AdminContacts import
@@ -103,6 +105,8 @@ const AppRoutes = () => {
         <Route path="schedule" element={<AdminSchedule />} />
         <Route path="reports" element={<AdminReports />} />
         <Route path="settings" element={<AdminSettings />} />
+        <Route path="maintenance" element={<MaintenanceManagement />} />
+        <Route path="services" element={<AdminServices />} />
       </Route>
 
       {/* Fallback Route */}
