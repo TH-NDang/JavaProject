@@ -6,8 +6,10 @@ interface Breadcrumb {
   href?: string;
 }
 
+
 interface PageHeaderProps {
   title: string;
+  description?: string;
   breadcrumbs?: Breadcrumb[];
   actions?: React.ReactNode;
 }
