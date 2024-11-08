@@ -34,3 +34,6 @@ logging:
     org.springframework.web: DEBUG
     org.hibernate: INFO
     com.example.koipond: DEBUG
+
+server:
+  port: 9999

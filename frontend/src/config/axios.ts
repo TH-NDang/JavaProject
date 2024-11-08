@@ -1,7 +1,7 @@
 import axios from "axios";
 import { Toast } from "../services/toast.service";
 
-const API_URL = "http://localhost:8080";
+const API_URL = "http://localhost:9999";
 
 const axiosInstance = axios.create({
   baseURL: API_URL,
