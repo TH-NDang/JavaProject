@@ -1,21 +1,28 @@
 package org.group.koipondbackend.mapper;
 
-import org.group.koipondbackend.dto.ServiceDTO;
+import org.group.koipondbackend.dto.service.ServiceDTO;
+import org.group.koipondbackend.dto.service.CreateServiceRequest;
+import org.group.koipondbackend.dto.service.UpdateServiceRequest;
 import org.group.koipondbackend.entity.Services;
 import org.mapstruct.Mapper;
-import org.springframework.stereotype.Component;
+import org.mapstruct.Mapping;
+import org.mapstruct.MappingTarget;
+import org.mapstruct.NullValuePropertyMappingStrategy;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
-@Component
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
 public interface ServiceMapper {
+    @Mapping(target = "id", source = "id")
+    @Mapping(target = "name", source = "name")
+    @Mapping(target = "description", source = "description")
+    @Mapping(target = "price", source = "price")
     ServiceDTO toDto(Services services);
 
-    Services toEntity(ServiceDTO serviceDTO);
+    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "name", source = "name")
+    @Mapping(target = "description", source = "description")
+    @Mapping(target = "price", source = "price")
+    Services toEntity(CreateServiceRequest request);
 
-    default List<ServiceDTO> toDtoList(List<Services> services) {
-        return services.stream().map(this::toDto).collect(Collectors.toList());
-    }
+    @Mapping(target = "id", ignore = true)
+    void updateEntityFromDto(UpdateServiceRequest request, @MappingTarget Services services);
 }
