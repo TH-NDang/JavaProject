@@ -1,10 +1,12 @@
 package org.group.koipondbackend.dto.order;
 
+import lombok.Builder;
 import lombok.Data;
 import org.group.koipondbackend.entity.enums.OrderStatus;
 import java.time.LocalDateTime;
 
 @Data
+@Builder
 public class OrderHistoryDTO {
     private Long id;
     private Long orderId;
