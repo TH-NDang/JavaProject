@@ -1,24 +1,51 @@
 package org.group.koipondbackend.controller;
 
-import org.group.koipondbackend.dto.ServiceDTO;
-import org.group.koipondbackend.service.impl.ServiceService;
+import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
+import org.group.koipondbackend.dto.service.ServiceDTO;
+import org.group.koipondbackend.dto.service.CreateServiceRequest;
+import org.group.koipondbackend.dto.service.UpdateServiceRequest;
+import org.group.koipondbackend.service.ServiceService;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/services")
+@RequiredArgsConstructor
 public class ServiceController {
-
     private final ServiceService serviceService;
 
-    public ServiceController(ServiceService serviceService) {
-        this.serviceService = serviceService;
+    @GetMapping
+    public ResponseEntity<List<ServiceDTO>> getAllServices() {
+        return ResponseEntity.ok(serviceService.getAllServices());
     }
 
-    @GetMapping public List<ServiceDTO> getAll() { return serviceService.findAll(); }
-    @GetMapping("/{id}") public ServiceDTO getById(@PathVariable Long id) { return serviceService.findById(id); }
-    @PostMapping public ServiceDTO create(@RequestBody ServiceDTO dto) { return serviceService.create(dto); }
-    @PutMapping("/{id}") public ServiceDTO update(@PathVariable Long id, @RequestBody ServiceDTO dto) { return serviceService.update(id, dto); }
-    @DeleteMapping("/{id}") public void delete(@PathVariable Long id) { serviceService.delete(id); }
+    @GetMapping("/{id}")
+    public ResponseEntity<ServiceDTO> getServiceById(@PathVariable Long id) {
+        return ResponseEntity.ok(serviceService.getServiceById(id));
+    }
+
+    @PostMapping
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<ServiceDTO> createService(@Valid @RequestBody CreateServiceRequest request) {
+        return ResponseEntity.ok(serviceService.createService(request));
+    }
+
+    @PutMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<ServiceDTO> updateService(
+            @PathVariable Long id,
+            @Valid @RequestBody UpdateServiceRequest request) {
+        return ResponseEntity.ok(serviceService.updateService(id, request));
+    }
+
+    @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<Void> deleteService(@PathVariable Long id) {
+        serviceService.deleteService(id);
+        return ResponseEntity.noContent().build();
+    }
 }

@@ -1,5 +1,7 @@
 package org.group.koipondbackend.entity;
 
+import java.util.List;
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -16,6 +18,21 @@ public class Services {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name, description;
-    private double price;
+
+    @Column(nullable = false)
+    private String name;
+
+    @Column(columnDefinition = "TEXT")
+    private String description;
+
+    @Column(nullable = false)
+    private Double price;
+
+    @ElementCollection
+    @CollectionTable(name = "service_features", joinColumns = @JoinColumn(name = "service_id"))
+    @Column(name = "feature")
+    private List<String> features;
+
+    @Column(name = "is_popular")
+    private Boolean isPopular;
 }
