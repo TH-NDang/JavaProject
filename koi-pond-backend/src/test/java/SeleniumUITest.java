@@ -1,45 +1,46 @@
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.edge.EdgeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
+import org.testng.Assert;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class SeleniumUITest {
+    WebDriver driver;
+
+    @BeforeEach
+    public void setUp() {
+        driver = new ChromeDriver();
+        driver.manage().window().maximize();
+        driver.get("http://localhost:3000/login");
+    }
 
     @Test
-    public void testLogin() {
-        // Cấu hình đường dẫn tới chromedriver
-        System.setProperty("webdriver.chrome.driver", "/usr/bin/chromedriver");
-        WebDriver driver = new ChromeDriver();
+    public void testLogin() throws InterruptedException {
+        WebElement email = driver.findElement(By.id("email"));
+        WebElement password = driver.findElement(By.id("password"));
 
-        // Cấu hình đường dẫn tới geckodriver
-        // System.setProperty("webdriver.gecko.driver", "/usr/bin/geckodriver");
-        // Khởi tạo WebDriver cho Firefox
-        // WebDriver driver = new FirefoxDriver();
-
-        // Cấu hình đường dẫn tới msedgedriver
-        // System.setProperty("webdriver.edge.driver", "/usr/bin/msedgedriver");
-        // Khởi tạo WebDriver cho Edge
-        // WebDriver driver = new EdgeDriver();
-
-        driver.get("http://localhost:3000/login");
-
-        driver.findElement(By.id("email")).sendKeys("admin@gmail.com");
-        driver.findElement(By.id("password")).sendKeys("admin123");
+        email.sendKeys("admin@gmail.com");
+        password.sendKeys("admin123");
 
         driver.findElement(By.cssSelector("button[type='submit']")).click();
+        Thread.sleep(3000);
 
-        // Chờ 1 phút để trang tải và kiểm tra kết quả
-        try {
-            Thread.sleep(60000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        String actualUrl = driver.getCurrentUrl();
+        String expectedUrl = "http://localhost:3000/admin/dashboard";
+        Assert.assertEquals(expectedUrl, actualUrl);
 
+        String actualText = driver.findElement(By.cssSelector("h1")).getText();
+        String expectedText = "Dashboard";
+        assertEquals(expectedText, actualText);
+    }
+
+    @AfterEach
+    public void tearDown() {
         driver.quit();
     }
 }
