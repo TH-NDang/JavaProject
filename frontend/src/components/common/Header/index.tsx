@@ -72,7 +72,7 @@ const Header: React.FC = () => {
         <div className="flex justify-between items-center py-4">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2">
-            <img src="/logo.svg" alt="Logo" className="h-10 w-auto" />
+            <img src={`/images/logo.svg`} alt="Logo" className="h-10 w-auto" />logo dau trang
             <span className={`text-xl font-bold ${getLogoStyle()}`}>
               Koi Pond Co.
             </span>
