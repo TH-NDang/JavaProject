@@ -1,13 +1,25 @@
 import api from "../../config/axios";
+import { Order, OrderHistory } from "../../types/order";
+
+interface GetOrdersParams {
+  page?: number;
+  size?: number;
+  search?: string;
+  status?: string;
+  sort?: string;
+}
+
+interface OrderListResponse {
+  content: Order[];
+  totalPages: number;
+  totalElements: number;
+  size: number;
+  number: number;
+}
 
 export const OrderService = {
-  async getAllOrders(params: {
-    page?: number;
-    size?: number;
-    search?: string;
-    status?: string;
-  }) {
-    const response = await api.get("/api/orders", { params });
+  async getAllOrders(params: GetOrdersParams): Promise<OrderListResponse> {
+    const response = await api.get<OrderListResponse>("/api/orders", { params });
     return response.data;
   },
 
