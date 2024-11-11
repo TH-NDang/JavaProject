@@ -177,22 +177,44 @@ const About: React.FC = () => {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-4 gap-8">
-            {team.map((member, index) => (
-              <div key={index} className="text-center">
-                <div className="relative mb-4">
-                  <img
-                    src={member.image}
-                    alt={member.name}
-                    className="w-full h-64 object-cover rounded-lg"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent rounded-lg" />
+          <div className="grid gap-8">
+            {/* First row - 3 members */}
+            <div className="grid md:grid-cols-3 gap-8">
+              {team.slice(0, 3).map((member, index) => (
+                <div key={index} className="text-center">
+                  <div className="relative mb-4">
+                    <img
+                      src={member.image}
+                      alt={member.name}
+                      className="w-full h-64 object-cover rounded-lg"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent rounded-lg" />
+                  </div>
+                  <h3 className="text-xl font-semibold mb-1">{member.name}</h3>
+                  <p className="text-primary-600 mb-2">{member.role}</p>
+                  <p className="text-gray-600 text-sm">{member.bio}</p>
                 </div>
-                <h3 className="text-xl font-semibold mb-1">{member.name}</h3>
-                <p className="text-primary-600 mb-2">{member.role}</p>
-                <p className="text-gray-600 text-sm">{member.bio}</p>
-              </div>
-            ))}
+              ))}
+            </div>
+
+            {/* Second row - 2 members */}
+            <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+              {team.slice(3).map((member, index) => (
+                <div key={index} className="text-center">
+                  <div className="relative mb-4">
+                    <img
+                      src={member.image}
+                      alt={member.name}
+                      className="w-full h-64 object-cover rounded-lg"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent rounded-lg" />
+                  </div>
+                  <h3 className="text-xl font-semibold mb-1">{member.name}</h3>
+                  <p className="text-primary-600 mb-2">{member.role}</p>
+                  <p className="text-gray-600 text-sm">{member.bio}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
