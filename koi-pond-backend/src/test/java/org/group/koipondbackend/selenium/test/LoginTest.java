@@ -3,7 +3,10 @@ package org.group.koipondbackend.selenium.test;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.group.koipondbackend.selenium.config.ChromeConfig;
 import org.group.koipondbackend.selenium.pages.*;
 import java.time.Duration;
 
@@ -17,8 +20,8 @@ public class LoginTest {
 
     @BeforeAll
     public void setUp() {
-        driver = new ChromeDriver();
-        driver.manage().window().maximize();
+        ChromeOptions options = ChromeConfig.getOptions();
+        driver = new ChromeDriver(options);
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
         loginPage = new LoginPage(driver, wait);
