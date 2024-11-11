@@ -104,7 +104,7 @@ export default function AdminLayout() {
         <div className="h-16 flex items-center justify-between px-4 bg-primary-800">
           {isSidebarOpen && (
             <Link to="/admin/dashboard" className="flex items-center space-x-3">
-              <Home className="h-8 w-8" />
+              <img className="h-8 w-8" src="/logo.png" alt="Koi Pond Co." />
               <span className="text-xl font-bold">Koi Pond</span>
             </Link>
           )}
