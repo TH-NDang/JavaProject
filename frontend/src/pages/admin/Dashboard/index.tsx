@@ -76,6 +76,7 @@ const Dashboard: React.FC = () => {
           growth={stats?.revenueGrowth}
           icon={DollarSign}
           loading={loading}
+          isCurrency={true}
         />
         <StatCard
           title="Đơn hàng"
@@ -83,6 +84,7 @@ const Dashboard: React.FC = () => {
           growth={stats?.orderGrowth}
           icon={ShoppingBag}
           loading={loading}
+          unit="đơn"
         />
         <StatCard
           title="Khách hàng"
@@ -90,6 +92,7 @@ const Dashboard: React.FC = () => {
           growth={stats?.customerGrowth}
           icon={Users}
           loading={loading}
+          unit="người"
         />
         <StatCard
           title="Giá trị TB/đơn"
@@ -97,6 +100,7 @@ const Dashboard: React.FC = () => {
           growth={stats?.valueGrowth}
           icon={Activity}
           loading={loading}
+          isCurrency={true}
         />
       </div>
 

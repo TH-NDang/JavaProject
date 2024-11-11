@@ -7,17 +7,19 @@ interface StatCardProps {
   growth?: number;
   icon: LucideIcon;
   loading?: boolean;
+  isCurrency?: boolean;
+  unit?: string;
 }
 
-const formatValue = (value: string | number): string => {
-  if (typeof value === "number") {
+const formatValue = (value: string | number, isCurrency: boolean, unit?: string): string => {
+  if (isCurrency && typeof value === "number") {
     return new Intl.NumberFormat("vi-VN", {
       style: "currency",
       currency: "VND",
       maximumFractionDigits: 0,
     }).format(value);
   }
-  return value.toString();
+  return `${value}${unit ? ` ${unit}` : ''}`;
 };
 
 const StatCard: React.FC<StatCardProps> = ({
@@ -26,6 +28,8 @@ const StatCard: React.FC<StatCardProps> = ({
   growth,
   icon: Icon,
   loading = false,
+  isCurrency = false,
+  unit,
 }) => {
   if (loading) {
     return (
@@ -46,7 +50,9 @@ const StatCard: React.FC<StatCardProps> = ({
       <div className="flex justify-between">
         <div>
           <p className="text-sm font-medium text-gray-600">{title}</p>
-          <h3 className="text-2xl font-semibold mt-2">{formatValue(value)}</h3>
+          <h3 className="text-2xl font-semibold mt-2">
+            {formatValue(value, isCurrency, unit)}
+          </h3>
           {growth !== undefined && (
             <div className="flex items-center mt-2">
               {growth > 0 ? (
