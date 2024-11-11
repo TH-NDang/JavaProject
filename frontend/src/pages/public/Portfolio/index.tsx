@@ -23,7 +23,7 @@ const projects: Project[] = [
       "Thiết kế và thi công hồ Koi phong cách hiện đại kết hợp cảnh quan sân vườn",
     location: "Quận 2, TP.HCM",
     completionDate: "2024",
-    images: ["/api/placeholder/800/600", "/api/placeholder/800/600"],
+    images: ["images/1.jpg", "images/2.jpg"],
     features: [
       "Diện tích: 50m²",
       "Độ sâu: 1.8m",
@@ -38,7 +38,7 @@ const projects: Project[] = [
     description: "Hồ Koi trung tâm kết hợp cảnh quan cho khu nghỉ dưỡng cao cấp",
     location: "Đà Lạt, Lâm Đồng",
     completionDate: "2023",
-    images: ["/api/placeholder/800/600", "/api/placeholder/800/600"],
+    images: ["images/3.jpg", "images/4.jpg"],
     features: [
       "Diện tích: 120m²",
       "Độ sâu: 2.2m",
@@ -106,7 +106,7 @@ const Portfolio: React.FC = () => {
               >
                 <div className="relative group">
                   <img
-                    src={project.images[0]}
+                    src={project.images[0]}//anh trong phan du an`/images/${item}.jpg`
                     alt={project.title}
                     className="w-full h-64 object-cover"
                   />

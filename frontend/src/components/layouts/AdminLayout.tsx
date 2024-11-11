@@ -161,7 +161,7 @@ export default function AdminLayout() {
         <div className="border-t border-primary-600 p-4">
           <div className="flex items-center">
             <img
-              src="/api/placeholder/40/40"
+              src="/api/placeholder/40/40"//avatar cho co
               alt="User avatar"
               className="h-10 w-10 rounded-full bg-primary-600"
             />
