@@ -77,7 +77,7 @@ const Footer: React.FC = () => {
           {/* Company Info */}
           <div>
             <div className="flex items-center space-x-2 mb-6">
-              <img src={`/images/logo.svg`} alt="Logo" className="h-8 w-auto"/> //logo phan Koi pond co
+              <img src={`logo.png`} alt="Logo" className="h-8 w-auto"/>
               <span className="text-white text-lg font-bold">Koi Pond Co.</span>
             </div>
             <ul className="mt-4 space-y-4">
