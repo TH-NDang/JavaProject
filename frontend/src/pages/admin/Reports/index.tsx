@@ -1,11 +1,15 @@
-export default function AdminReports() {
+import { BarChart2 } from "lucide-react";
+import ComingSoonPage from "../../../components/common/ComingSoonPage";
+
+const AdminReports = () => {
   return (
-    <div className="space-y-6">
-      <div>
-        <h1 className="text-2xl font-semibold text-gray-900">Báo cáo</h1>
-        <p className="mt-1 text-sm text-gray-500">Xem báo cáo và thống kê</p>
-      </div>
-      {/* Add reports content */}
-    </div>
+    <ComingSoonPage
+      title="Báo Cáo & Thống Kê"
+      description="Hệ thống báo cáo và phân tích dữ liệu nâng cao đang được phát triển."
+      icon={BarChart2}
+      expectedDate="Quý 4/2024"
+    />
   );
-}
+};
+
+export default AdminReports;

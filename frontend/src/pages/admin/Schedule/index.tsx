@@ -1,13 +1,15 @@
-export default function AdminSchedule() {
+import { Calendar } from "lucide-react";
+import ComingSoonPage from "../../../components/common/ComingSoonPage";
+
+const AdminSchedule = () => {
   return (
-    <div className="space-y-6">
-      <div>
-        <h1 className="text-2xl font-semibold text-gray-900">Lịch công việc</h1>
-        <p className="mt-1 text-sm text-gray-500">
-          Quản lý lịch trình công việc của nhân viên
-        </p>
-      </div>
-      {/* Add schedule content */}
-    </div>
+    <ComingSoonPage
+      title="Quản lý Lịch Công Việc"
+      description="Hệ thống quản lý lịch biểu và điều phối công việc sẽ sớm ra mắt."
+      icon={Calendar}
+      expectedDate="Quý 4/2024"
+    />
   );
-}
+};
+
+export default AdminSchedule;
