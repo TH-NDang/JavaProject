@@ -2,8 +2,11 @@ spring:
   application:
     name: koi-pond-backend
 
+  profiles:
+    active: dev
+
   datasource:
-    url: jdbc:sqlserver://localhost:1433;databaseName=master;encrypt=true;trustServerCertificate=true
+    url: jdbc:sqlserver://localhost:1433;databaseName=master;encrypt=true;trustServerCertificate=true;characterEncoding=UTF-8
     username: sa
     password: Password@sa
     driverClassName: com.microsoft.sqlserver.jdbc.SQLServerDriver
@@ -15,7 +18,16 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.SQLServerDialect
-        format_sql: true
+        '[format_sql]': true
+        connection:
+          characterEncoding: utf8
+          useUnicode: true
+          charSet: UTF-8
+http:
+  encoding:
+    charset: UTF-8
+    enabled: true
+    force: true
 
   flyway:
     enabled: true
@@ -30,10 +42,16 @@ app:
 
 logging:
   level:
-    org.springframework.security: DEBUG
-    org.springframework.web: DEBUG
-    org.hibernate: INFO
-    com.example.koipond: DEBUG
+    '[org.springframework.security]': DEBUG
+    '[org.springframework.web]': DEBUG
+    '[org.hibernate]': INFO
+    '[com.example.koipond]': DEBUG
+
+ 
 
 server:
   port: 9999
+  servlet:
+    encoding:
+      charset: UTF-8
+      force: true

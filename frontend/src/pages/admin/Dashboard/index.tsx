@@ -1,72 +1,55 @@
-import { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import { Activity, DollarSign, ShoppingBag, Users } from "lucide-react";
+import StatCard from "../../../components/admin/Dashboard/StatCard";
+import RecentOrders from "../../../components/admin/Dashboard/RecentOrders";
 import {
-  Users,
-  FileText,
-  BarChart2,
-  Wrench,
-  TrendingUp,
-  TrendingDown,
-} from "lucide-react";
+  RevenueChart,
+  OrderChart,
+  ServiceChart,
+} from "../../../components/admin/Dashboard/DashboardCharts";
+import {
+  DashboardService,
+  DashboardStats,
+  RevenueStats,
+  OrderStats,
+  ServiceStats,
+} from "../../../services/api/dashboard.service";
+import { OrderService } from "../../../services/api/order.service";
+import { Toast } from "../../../services/toast.service";
+import { Order } from "../../../types/order";
 
-interface StatCardProps {
-  title: string;
-  value: string | number;
-  icon: React.ElementType;
-  trend?: {
-    value: number;
-    isPositive: boolean;
-  };
-  bgColor?: string;
-}
-
-const StatCard: React.FC<StatCardProps> = ({
-  title,
-  value,
-  icon: Icon,
-  trend,
-  bgColor = "bg-white",
-}) => (
-  <div className={`${bgColor} rounded-lg shadow p-6`}>
-    <div className="flex items-center justify-between">
-      <div>
-        <p className="text-sm font-medium text-gray-600">{title}</p>
-        <p className="mt-2 text-3xl font-semibold text-gray-900">{value}</p>
-        {trend && (
-          <div className="mt-2 flex items-center">
-            {trend.isPositive ? (
-              <TrendingUp className="h-4 w-4 text-green-500" />
-            ) : (
-              <TrendingDown className="h-4 w-4 text-red-500" />
-            )}
-            <span
-              className={`ml-2 text-sm ${
-                trend.isPositive ? "text-green-500" : "text-red-500"
-              }`}
-            >
-              {trend.value}%
-            </span>
-          </div>
-        )}
-      </div>
-      <div className="p-3 bg-primary-100 rounded-full">
-        <Icon className="h-6 w-6 text-primary-600" />
-      </div>
-    </div>
-  </div>
-);
-
-export default function AdminDashboard() {
-  const [recentOrders, setRecentOrders] = useState([]);
+const Dashboard: React.FC = () => {
   const [loading, setLoading] = useState(true);
+  const [stats, setStats] = useState<DashboardStats | null>(null);
+  const [revenueData, setRevenueData] = useState<RevenueStats[]>([]);
+  const [orderData, setOrderData] = useState<OrderStats[]>([]);
+  const [serviceData, setServiceData] = useState<ServiceStats[]>([]);
+  const [recentOrders, setRecentOrders] = useState<Order[]>([]);
 
   useEffect(() => {
-    // TODO: Fetch dashboard data
     const fetchDashboardData = async () => {
       try {
-        // const response = await api.get('/admin/dashboard');
-        // setRecentOrders(response.data.orders);
+        setLoading(true);
+        const [statsData, revenueStats, orderStats, serviceStats, latestOrders] =
+          await Promise.all([
+            DashboardService.getStats(),
+            DashboardService.getRevenueStats(),
+            DashboardService.getOrderStats(),
+            DashboardService.getServiceStats(),
+            OrderService.getAllOrders({
+              page: 0,
+              size: 5,
+              sort: "createdAt,desc",
+            }),
+          ]);
+
+        setStats(statsData);
+        setRevenueData(revenueStats);
+        setOrderData(orderStats);
+        setServiceData(serviceStats);
+        setRecentOrders(latestOrders.content);
       } catch (error) {
-        console.error("Error fetching dashboard data:", error);
+        Toast.error("Không thể tải dữ liệu thống kê");
       } finally {
         setLoading(false);
       }
@@ -75,90 +58,61 @@ export default function AdminDashboard() {
     fetchDashboardData();
   }, []);
 
-  const stats = [
-    {
-      title: "Tổng đơn hàng",
-      value: "156",
-      icon: FileText,
-      trend: { value: 12, isPositive: true },
-    },
-    {
-      title: "Khách hàng mới",
-      value: "32",
-      icon: Users,
-      trend: { value: 8.2, isPositive: true },
-    },
-    {
-      title: "Doanh thu tháng",
-      value: "258.2M",
-      icon: BarChart2,
-      trend: { value: 5.1, isPositive: true },
-    },
-    {
-      title: "Đơn hàng đang thực hiện",
-      value: "12",
-      icon: Wrench,
-      trend: { value: 2.3, isPositive: false },
-    },
-  ];
-
   return (
     <div className="space-y-6">
+      {/* Page Title */}
       <div>
-        <h1 className="text-2xl font-semibold text-gray-900">Dashboard</h1>
+        <h1 className="text-2xl font-semibold text-gray-900">Tổng quan</h1>
         <p className="mt-1 text-sm text-gray-500">
-          Tổng quan hoạt động kinh doanh
+          Thống kê hoạt động kinh doanh
         </p>
       </div>
 
-      {/* Stats Grid */}
-      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-        {stats.map((stat, index) => (
-          <StatCard key={index} {...stat} />
-        ))}
+      {/* Stat Cards */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <StatCard
+          title="Doanh thu tháng"
+          value={stats?.totalRevenue || 0}
+          growth={stats?.revenueGrowth}
+          icon={DollarSign}
+          loading={loading}
+        />
+        <StatCard
+          title="Đơn hàng"
+          value={stats?.totalOrders || 0}
+          growth={stats?.orderGrowth}
+          icon={ShoppingBag}
+          loading={loading}
+        />
+        <StatCard
+          title="Khách hàng"
+          value={stats?.totalCustomers || 0}
+          growth={stats?.customerGrowth}
+          icon={Users}
+          loading={loading}
+        />
+        <StatCard
+          title="Giá trị TB/đơn"
+          value={stats?.avgOrderValue || 0}
+          growth={stats?.valueGrowth}
+          icon={Activity}
+          loading={loading}
+        />
       </div>
 
-      {/* Recent Orders */}
-      <div className="bg-white shadow rounded-lg">
-        <div className="px-4 py-5 sm:px-6 border-b border-gray-200">
-          <h3 className="text-lg leading-6 font-medium text-gray-900">
-            Đơn hàng gần đây
-          </h3>
-        </div>
-        <div className="px-4 py-5 sm:p-6">
-          {loading ? (
-            <div className="text-center">
-              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary-600 mx-auto" />
-            </div>
-          ) : recentOrders.length > 0 ? (
-            <div className="overflow-x-auto">
-              <table className="min-w-full divide-y divide-gray-200">
-                <thead className="bg-gray-50">
-                  <tr>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Mã đơn
-                    </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Khách hàng
-                    </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Trạng thái
-                    </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Ngày tạo
-                    </th>
-                  </tr>
-                </thead>
-                <tbody className="bg-white divide-y divide-gray-200">
-                  {/* TODO: Add order rows */}
-                </tbody>
-              </table>
-            </div>
-          ) : (
-            <p className="text-gray-500 text-center">Chưa có đơn hàng nào</p>
-          )}
-        </div>
+      {/* Charts */}
+      <div className="grid lg:grid-cols-2 gap-6">
+        <RevenueChart data={revenueData} loading={loading} />
+        <OrderChart data={orderData} loading={loading} />
+      </div>
+
+      {/* Service Stats and Recent Orders */}
+      <div className="grid lg:grid-cols-2 gap-6">
+        <ServiceChart data={serviceData} loading={loading} />
+        <RecentOrders orders={recentOrders} loading={loading} />
       </div>
     </div>
   );
-}
+};
+
+export default Dashboard;
