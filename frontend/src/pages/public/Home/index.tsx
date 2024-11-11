@@ -31,7 +31,7 @@ const Home: React.FC = () => {
       <section className="relative bg-gradient-to-r from-primary-600 to-primary-800 text-white">
         <div className="absolute inset-0">
           <img
-            src="/api/placeholder/1920/1080"
+            src={`/images/6.jpg`}
             alt="Hero background"
             className="w-full h-full object-cover opacity-20"
           />
@@ -101,7 +101,7 @@ const Home: React.FC = () => {
                 className="bg-white rounded-lg overflow-hidden shadow-md"
               >
                 <img
-                  src={`/api/placeholder/600/400`}
+                  src={`/images/${item}.jpg`}
                   alt={`Project ${item}`}
                   className="w-full h-48 object-cover"
                 />
