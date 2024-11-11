@@ -131,8 +131,8 @@ export default function AdminLayout() {
                 key={item.path}
                 to={item.path}
                 className={`
-                  flex items-center px-2 py-2 text-sm font-medium rounded-md
-                  transition-colors duration-200
+                  relative flex items-center px-2 py-2 text-sm font-medium rounded-md
+                  transition-colors duration-200 group
                   ${
                     isActive
                       ? "bg-primary-800 text-white"
@@ -141,7 +141,17 @@ export default function AdminLayout() {
                 `}
               >
                 <Icon className="mr-3 h-6 w-6" />
-                {isSidebarOpen && <span>{item.label}</span>}
+                {isSidebarOpen ? (
+                  <span>{item.label}</span>
+                ) : (
+                  <div className="absolute left-full rounded-md px-3 py-2 ml-6 
+                    bg-white text-primary-700 text-sm shadow-lg border border-gray-100
+                    invisible opacity-0 -translate-x-3 transition-all
+                    group-hover:visible group-hover:opacity-100 group-hover:translate-x-0
+                    whitespace-nowrap z-50">
+                    {item.label}
+                  </div>
+                )}
               </Link>
             );
           })}
