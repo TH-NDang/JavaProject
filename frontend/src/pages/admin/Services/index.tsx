@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { PlusIcon } from "lucide-react";
 import { ServicePrice } from "../../../types/service";
-import { ServiceService } from "../../../services/api/service.service";
+import { ServiceService } from "../../../services/service.service";
 import { Toast } from "../../../services/toast.service";
 import ServicePriceCard from "./ServicePriceCard";
 import ServiceFormModal from "./ServiceFormModal";

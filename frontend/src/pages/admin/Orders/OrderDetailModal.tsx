@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { X } from "lucide-react";
-import { OrderService } from "../../../services/api/order.service";
+import { OrderService } from "../../../services/order.service";
 import { OrderStatusBadge } from "./OrderStatusBadge";
 import { Toast } from "../../../services/toast.service";
 import { Order, OrderHistory, OrderStatus } from "../../../types/order";

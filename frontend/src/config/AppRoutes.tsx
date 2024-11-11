@@ -1,6 +1,6 @@
 import { Routes, Route, Navigate } from "react-router-dom";
-import { useAuth } from "../contexts/AuthContext";
-import { ROUTES, USER_ROLES } from "../constants/routes";
+import { useAuth } from "./AuthContext";
+import { ROUTES, USER_ROLES } from "../types/routes";
 
 // Layouts
 import PublicLayout from "../components/layouts/PublicLayout";

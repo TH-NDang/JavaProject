@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { UserService } from "../../../services/api/user.service";
+import { UserService } from "../../../services/user.service";
 import { User, CreateUserRequest, UpdateUserRequest } from "../../../types/user";
 import { UserPlus, Search, Filter } from "lucide-react";
 import DataTable from "../../../components/common/DataTable";

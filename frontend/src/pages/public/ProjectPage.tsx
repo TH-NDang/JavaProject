@@ -1,6 +1,6 @@
 // src/pages/public/ProjectPage.tsx
 import React from "react";
-import ProjectList from "../../components/public/ProjectList";
+import ProjectList from "../../components/modals/ProjectList";
 
 const ProjectPage: React.FC = () => {
     return (

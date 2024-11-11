@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { X } from "lucide-react";
-import { OrderService } from "../../../services/api/order.service";
+import { OrderService } from "../../../services/order.service";
 import { Toast } from "../../../services/toast.service";
 import { Order } from "../../../types/order";
 

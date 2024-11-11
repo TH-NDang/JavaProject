@@ -13,8 +13,8 @@ import {
   RevenueStats,
   OrderStats,
   ServiceStats,
-} from "../../../services/api/dashboard.service";
-import { OrderService } from "../../../services/api/order.service";
+} from "../../../services/dashboard.service";
+import { OrderService } from "../../../services/order.service";
 import { Toast } from "../../../services/toast.service";
 import { Order } from "../../../types/order";
 

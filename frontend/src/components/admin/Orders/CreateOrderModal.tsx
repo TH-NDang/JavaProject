@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { X } from "lucide-react";
 import CreateOrderForm from "./CreateOrderForm";
-import { OrderService } from "../../../services/api/order.service";
+import { OrderService } from "../../../services/order.service";
 import { Toast } from "../../../services/toast.service";
 
 interface CreateOrderModalProps {

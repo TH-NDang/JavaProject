@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { MapPin, Phone, Mail, Clock } from "lucide-react";
-import ContactForm from "../../../components/public/ContactForm";
+import ContactForm from "../../../components/modals/ContactForm";
 
 const Contact: React.FC = () => {
   // !TODO: Thay thế nếu cần

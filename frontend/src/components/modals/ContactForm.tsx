@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { ContactService } from "../../services/api/contact.service";
+import { ContactService } from "../../services/contact.service";
 import { ContactFormData } from "../../types/contact";
 import {
   Send,

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { X } from "lucide-react";
 import { Contact, ContactStatus, CONTACT_STATUS } from "../../types/contact";
-import { ContactService } from "../../services/api/contact.service";
+import { ContactService } from "../../services/contact.service";
 import { Toast } from "../../services/toast.service";
 
 interface ContactDetailModalProps {

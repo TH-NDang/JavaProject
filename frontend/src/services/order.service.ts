@@ -1,5 +1,5 @@
-import api from "../../config/axios";
-import { Order, OrderHistory } from "../../types/order";
+import api from "../config/axios";
+import { Order, OrderHistory } from "../types/order";
 
 interface GetOrdersParams {
   page?: number;

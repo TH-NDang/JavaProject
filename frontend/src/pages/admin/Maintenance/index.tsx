@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { MaintenanceSchedule } from "../../../types/maintenance";
-import { MaintenanceService } from "../../../services/api/maintenance.service";
+import { MaintenanceService } from "../../../services/maintenance.service";
 import { Toast } from "../../../services/toast.service";
 import MaintenanceCalendar from "./MaintenanceCalendar";
 import MaintenanceScheduleModal from "./MaintenanceScheduleModal";
 import MaintenanceCompletionModal from "./MaintenanceCompletionModal";
 import PageHeader from "../../../components/common/PageHeader";
-import { StaffService } from "../../../services/api/staff.service";
+import { StaffService } from "../../../services/staff.service";
 import { generateMockSchedules, mockStaff } from "./mockData";
-
 
 export default function MaintenanceManagement() {
   const [schedules, setSchedules] = useState<MaintenanceSchedule[]>([]);
@@ -19,8 +18,8 @@ export default function MaintenanceManagement() {
   const [showCompletionModal, setShowCompletionModal] = useState(false);
   const [availableStaff, setAvailableStaff] = useState<
     Array<{ id: number; name: string }>
-    >([]);
-  
+  >([]);
+
   const fetchSchedules = async () => {
     try {
       setLoading(true);
@@ -28,7 +27,7 @@ export default function MaintenanceManagement() {
       const mockData = generateMockSchedules();
       setSchedules(mockData);
     } catch (error) {
-      Toast.error('Không thể tải lịch bảo trì');
+      Toast.error("Không thể tải lịch bảo trì");
     } finally {
       setLoading(false);
     }
@@ -39,11 +38,9 @@ export default function MaintenanceManagement() {
       // Tạm thời sử dụng mock data
       setAvailableStaff(mockStaff);
     } catch (error) {
-      Toast.error('Không thể tải danh sách nhân viên');
+      Toast.error("Không thể tải danh sách nhân viên");
     }
-
   };
-
 
   // const fetchSchedules = async () => {
   //   try {

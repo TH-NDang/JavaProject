@@ -1,5 +1,5 @@
-import axios from "../../config/axios";
-import { MaintenanceSchedule } from "../../types/maintenance";
+import axios from "../config/axios";
+import { MaintenanceSchedule } from "../types/maintenance";
 
 export class MaintenanceService {
   static async getAllSchedules() {

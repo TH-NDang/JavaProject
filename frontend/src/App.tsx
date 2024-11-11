@@ -1,6 +1,6 @@
 import { BrowserRouter } from "react-router-dom";
-import { AuthProvider } from "./contexts/AuthContext";
-import AppRoutes from "./routes";
+import { AuthProvider } from "./config/AuthContext";
+import AppRoutes from "./config/AppRoutes";
 import { Toaster } from "sonner";
 
 const App = () => {

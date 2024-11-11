@@ -1,10 +1,10 @@
-import axios from "../../config/axios";
+import axios from "../config/axios";
 import {
   Contact,
   ContactResponse,
   CreateContactRequest,
   UpdateContactRequest,
-} from "../../types/contact";
+} from "../types/contact";
 
 export class ContactService {
   static async getAllContacts(params: {

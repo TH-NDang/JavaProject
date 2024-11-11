@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { Search, Filter, Eye, Download } from "lucide-react";
 import { Toast } from "../../../services/toast.service";
-import { ContactService } from "../../../services/api/contact.service";
+import { ContactService } from "../../../services/contact.service";
 import { Contact, ContactStatus, CONTACT_STATUS } from "../../../types/contact";
 import DataTable from "../../../components/common/DataTable";
 import PageHeader from "../../../components/common/PageHeader";

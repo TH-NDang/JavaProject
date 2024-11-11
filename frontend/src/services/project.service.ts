@@ -1,6 +1,6 @@
-import axios from "../../config/axios";
-import { ProjectDTO } from "../../types/project";
-import { Order } from "../../types/order";
+import axios from "../config/axios";
+import { ProjectDTO } from "../types/project";
+import { Order } from "../types/order";
 
 export class ProjectService {
   static async getAllProjects(): Promise<ProjectDTO[]> {

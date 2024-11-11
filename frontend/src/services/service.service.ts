@@ -1,5 +1,5 @@
-import axios from "../../config/axios";
-import { ServicePrice } from "../../types/service";
+import axios from "../config/axios";
+import { ServicePrice } from "../types/service";
 
 export class ServiceService {
   static async getAllServices() {

@@ -1,6 +1,6 @@
 // src/services/api/staff.service.ts
-import axios from "../../config/axios";
-import { Staff } from "../../types/staff";
+import axios from "../config/axios";
+import { Staff } from "../types/staff";
 
 export class StaffService {
   static async getAllStaff() {

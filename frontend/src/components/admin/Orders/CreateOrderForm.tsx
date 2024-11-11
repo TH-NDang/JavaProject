@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { ServiceService } from "../../../services/api/service.service";
-import { UserService } from "../../../services/api/user.service";
+import { ServiceService } from "../../../services/service.service";
+import { UserService } from "../../../services/user.service";
 import { ServicePrice } from "../../../types/service";
 import { User } from "../../../types/auth";
 import { Toast } from "../../../services/toast.service";

@@ -18,7 +18,7 @@ import {
   RevenueStats,
   OrderStats,
   ServiceStats,
-} from "../../../services/api/dashboard.service";
+} from "../../../services/dashboard.service";
 
 interface ChartContainerProps {
   title: string;
