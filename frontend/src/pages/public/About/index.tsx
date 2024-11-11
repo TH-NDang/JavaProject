@@ -1,74 +1,80 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { Users, Award, Clock, Target, ArrowRight } from 'lucide-react';
+import React from "react";
+import { Link } from "react-router-dom";
+import { Users, Award, Clock, Target, ArrowRight } from "lucide-react";
 
 const stats = [
   {
     icon: Users,
-    label: 'Khách hàng hài lòng',
-    value: '500+',
+    label: "Khách hàng hài lòng",
+    value: "500+",
   },
   {
     icon: Award,
-    label: 'Năm kinh nghiệm',
-    value: '10+',
+    label: "Năm kinh nghiệm",
+    value: "10+",
   },
   {
     icon: Clock,
-    label: 'Dự án hoàn thành',
-    value: '300+',
+    label: "Dự án hoàn thành",
+    value: "300+",
   },
   {
     icon: Target,
-    label: 'Đội ngũ chuyên gia',
-    value: '50+',
+    label: "Đội ngũ chuyên gia",
+    value: "50+",
   },
 ];
 
-// TODO: get team members from API
 const team = [
   {
-    name: 'Nguyễn Văn A',
-    role: 'Giám đốc điều hành',
-    image: '/api/placeholder/400/400',
-    bio: '15 năm kinh nghiệm trong lĩnh vực thiết kế và thi công hồ cá Koi.',
+    name: "Nguyễn Ngọc Đặng",
+    role: "Giám đốc điều hành",
+    image: "/api/placeholder/400/400",
+    bio: "Có một siếu kinh nghiệm.",
   },
   {
-    name: 'Trần Thị B',
-    role: 'Trưởng phòng thiết kế',
-    image: '/api/placeholder/400/400',
-    bio: 'Chuyên gia thiết kế với nhiều dự án lớn trong và ngoài nước.',
+    name: "Nguyễn Hữu Văn Lâm",
+    role: "Trưởng phòng thiết kế",
+    image: "/api/placeholder/400/400",
+    bio: "Chuyên gia thiết kế với nhiều dự án lớn trong và ngoài nước.",
   },
   {
-    name: 'Lê Văn C',
-    role: 'Trưởng phòng kỹ thuật',
-    image: '/api/placeholder/400/400',
-    bio: 'Chuyên gia về hệ thống lọc và xử lý nước cho hồ Koi.',
+    name: "Vũ Quốc Anh",
+    role: "Trưởng phòng kỹ thuật",
+    image: "/api/placeholder/400/400",
+    bio: "Chuyên gia về hệ thống lọc và xử lý nước cho hồ Koi.",
   },
   {
-    name: 'Phạm Thị D',
-    role: 'Quản lý dự án',
-    image: '/api/placeholder/400/400',
-    bio: '10 năm kinh nghiệm quản lý các dự án quy mô lớn.',
+    name: "Hồ Thủy Như Trúc",
+    role: "Quản lý dự án",
+    image: "/api/placeholder/400/400",
+    bio: "10 năm kinh nghiệm quản lý các dự án quy mô lớn.",
+  },
+  {
+    name: "Trần Thị Mỹ Ngân",
+    role: "Quản lý dự án",
+    image: "/api/placeholder/400/400",
+    bio: "10 năm kinh nghiệm quản lý các dự án quy mô lớn.",
   },
 ];
 
 const values = [
   {
-    title: 'Chất lượng hàng đầu',
-    description: 'Cam kết mang đến những sản phẩm và dịch vụ chất lượng cao nhất cho khách hàng.',
+    title: "Chất lượng hàng đầu",
+    description:
+      "Cam kết mang đến những sản phẩm và dịch vụ chất lượng cao nhất cho khách hàng.",
   },
   {
-    title: 'Sáng tạo không ngừng',
-    description: 'Luôn đổi mới và cập nhật những xu hướng thiết kế mới nhất.',
+    title: "Sáng tạo không ngừng",
+    description: "Luôn đổi mới và cập nhật những xu hướng thiết kế mới nhất.",
   },
   {
-    title: 'Trách nhiệm cao',
-    description: 'Đảm bảo tiến độ và chất lượng cho mọi dự án được giao.',
+    title: "Trách nhiệm cao",
+    description: "Đảm bảo tiến độ và chất lượng cho mọi dự án được giao.",
   },
   {
-    title: 'Khách hàng là trọng tâm',
-    description: 'Lắng nghe và đáp ứng mọi nhu cầu của khách hàng.',
+    title: "Khách hàng là trọng tâm",
+    description: "Lắng nghe và đáp ứng mọi nhu cầu của khách hàng.",
   },
 ];
 
@@ -114,20 +120,19 @@ const About: React.FC = () => {
               </p>
             </div>
             <div className="grid grid-cols-2 gap-4">
-              {/* TODO: thực hiện các thay thế */}
               <img
-                src="/api/placeholder/400/600"
+                src="/images/about/image1.png"
                 alt="About us 1"
                 className="rounded-lg object-cover w-full h-full"
               />
               <div className="grid gap-4">
                 <img
-                  src="/api/placeholder/400/300"
+                  src="/images/about/image2.png"
                   alt="About us 2"
                   className="rounded-lg object-cover w-full h-full"
                 />
                 <img
-                  src="/api/placeholder/400/300"
+                  src="/images/about/image3.png"
                   alt="About us 3"
                   className="rounded-lg object-cover w-full h-full"
                 />
