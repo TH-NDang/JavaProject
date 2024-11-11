@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Search, Filter, Eye, XCircle } from "lucide-react";
 import { OrderService } from "../../../services/order.service";
 import { Toast } from "../../../services/toast.service";
-import DataTable from "../../../components/common/DataTable";
+import DataTable from "../../common/DataTable";
 import OrderDetailModal from "./OrderDetailModal";
 import OrderCancelModal from "./OrderCancelModal";
 import { OrderStatusBadge } from "./OrderStatusBadge";

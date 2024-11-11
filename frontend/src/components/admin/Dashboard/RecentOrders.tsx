@@ -1,7 +1,7 @@
 import React from "react";
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
-import { OrderStatusBadge } from "../../../pages/admin/Orders/OrderStatusBadge";
+import { OrderStatusBadge } from "../Orders/OrderStatusBadge";
 import { Order } from "../../../types/order";
 
 interface RecentOrdersProps {

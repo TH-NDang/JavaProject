@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Plus } from "lucide-react";
-import OrderList from "./OrderList";
+import OrderList from "../../../components/admin/Orders/OrderList";
 import CreateOrderModal from "../../../components/admin/Orders/CreateOrderModal";
 import PageHeader from "../../../components/common/PageHeader";
 

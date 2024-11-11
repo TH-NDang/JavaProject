@@ -3,8 +3,8 @@ import { PlusIcon } from "lucide-react";
 import { ServicePrice } from "../../../types/service";
 import { ServiceService } from "../../../services/service.service";
 import { Toast } from "../../../services/toast.service";
-import ServicePriceCard from "./ServicePriceCard";
-import ServiceFormModal from "./ServiceFormModal";
+import ServicePriceCard from "../../../components/admin/Services/ServicePriceCard";
+import ServiceFormModal from "../../../components/admin/Services/ServiceFormModal";
 import PageHeader from "../../../components/common/PageHeader";
 
 export default function ServicesManagement() {
