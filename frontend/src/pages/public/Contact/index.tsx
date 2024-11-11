@@ -81,26 +81,6 @@ const Contact: React.FC = () => {
           </div>
         </div>
       </section>
-
-      {/* Map Section */}
-      <section className="bg-gray-50 py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold mb-4">Vị Trí Của Chúng Tôi</h2>
-            <p className="text-gray-600 max-w-2xl mx-auto">
-              Ghé thăm showroom của chúng tôi để trải nghiệm không gian trưng bày
-              hồ cá Koi
-            </p>
-          </div>
-          {/* TODO: Add Google Map integration here */}
-          <div className="h-96 bg-gray-200 rounded-lg">
-            {/* Map placeholder */}
-            <div className="w-full h-full flex items-center justify-center text-gray-500">
-              Google Map sẽ được hiển thị ở đây
-            </div>
-          </div>
-        </div>
-      </section>
     </div>
   );
 };
