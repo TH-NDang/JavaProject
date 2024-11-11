@@ -23,13 +23,21 @@ public interface OrderRepository extends JpaRepository<Order, Long>, JpaSpecific
 
     List<Order> findAllByCreatedAtAfter(LocalDateTime date);
 
-    @Query("SELECT SUM(o.totalAmount) FROM Order o WHERE o.createdAt BETWEEN :startDate AND :endDate")
+    @Query("SELECT COALESCE(SUM(o.totalAmount), 0.0) FROM Order o WHERE o.createdAt BETWEEN :startDate AND :endDate")
     Double calculateTotalRevenueBetween(
-            @Param("startDate") LocalDateTime startDate,
-            @Param("endDate") LocalDateTime endDate);
+                    @Param("startDate") LocalDateTime startDate,
+                    @Param("endDate") LocalDateTime endDate);
 
     @Query("SELECT COUNT(o) FROM Order o WHERE o.createdAt BETWEEN :startDate AND :endDate")
     Integer countOrdersBetween(
-            @Param("startDate") LocalDateTime startDate,
-            @Param("endDate") LocalDateTime endDate);
+                    @Param("startDate") LocalDateTime startDate,
+                    @Param("endDate") LocalDateTime endDate);
+
+    @Query("SELECT COALESCE(COUNT(o), 0) FROM Order o WHERE o.createdAt BETWEEN :startDate AND :endDate")
+    Long countOrdersInPeriod(
+                    @Param("startDate") LocalDateTime startDate,
+                    @Param("endDate") LocalDateTime endDate);
+
+    @Query("SELECT o FROM Order o WHERE o.status IN ('COMPLETED', 'CANCELLED') ORDER BY o.createdAt DESC")
+    List<Order> findCompletedOrCancelledOrders();
 }

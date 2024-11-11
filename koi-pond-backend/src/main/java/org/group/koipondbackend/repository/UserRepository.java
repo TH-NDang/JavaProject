@@ -1,6 +1,7 @@
 package org.group.koipondbackend.repository;
 
 import org.group.koipondbackend.entity.User;
+import org.group.koipondbackend.entity.enums.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
@@ -16,6 +17,8 @@ public interface UserRepository extends JpaRepository<User, Long>, JpaSpecificat
     Optional<User> findByEmail(String email);
 
     boolean existsByEmail(String email);
+
+    List<User> findAllByRole(Role role);
 
     @Query("SELECT COUNT(u) FROM User u WHERE u.role = 'CUSTOMER'")
     Integer countAllCustomers();

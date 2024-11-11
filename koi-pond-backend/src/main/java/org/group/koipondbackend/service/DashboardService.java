@@ -28,11 +28,12 @@ public class DashboardService {
         // Lấy thời điểm đầu tháng này và tháng trước
         LocalDateTime startOfCurrentMonth = YearMonth.now().atDay(1).atStartOfDay();
         LocalDateTime startOfLastMonth = YearMonth.now().minusMonths(1).atDay(1).atStartOfDay();
+        LocalDateTime now = LocalDateTime.now();
 
         // Thống kê doanh thu
         double currentMonthRevenue = orderRepository.calculateTotalRevenueBetween(
                 startOfCurrentMonth,
-                LocalDateTime.now());
+                now);
         double lastMonthRevenue = orderRepository.calculateTotalRevenueBetween(
                 startOfLastMonth,
                 startOfCurrentMonth);
@@ -40,7 +41,7 @@ public class DashboardService {
         // Thống kê đơn hàng
         int currentMonthOrders = orderRepository.countOrdersBetween(
                 startOfCurrentMonth,
-                LocalDateTime.now());
+                now);
         int lastMonthOrders = orderRepository.countOrdersBetween(
                 startOfLastMonth,
                 startOfCurrentMonth);
@@ -48,7 +49,7 @@ public class DashboardService {
         // Thống kê khách hàng mới
         int currentMonthCustomers = userRepository.countNewCustomersBetween(
                 startOfCurrentMonth,
-                LocalDateTime.now());
+                now);
         int lastMonthCustomers = userRepository.countNewCustomersBetween(
                 startOfLastMonth,
                 startOfCurrentMonth);
@@ -63,10 +64,13 @@ public class DashboardService {
         double lastAvgValue = lastMonthOrders > 0 ? lastMonthRevenue / lastMonthOrders : 0;
         double valueGrowth = calculateGrowth(lastAvgValue, currentAvgValue);
 
+        // Tính tổng số khách hàng
+        int totalCustomers = userRepository.countAllCustomers();
+
         return DashboardStatsDTO.builder()
                 .totalRevenue(currentMonthRevenue)
                 .totalOrders(currentMonthOrders)
-                .totalCustomers(userRepository.countAllCustomers())
+                .totalCustomers(totalCustomers)
                 .avgOrderValue(currentAvgValue)
                 .revenueGrowth(revenueGrowth)
                 .orderGrowth(orderGrowth)
@@ -85,13 +89,19 @@ public class DashboardService {
                         order -> YearMonth.from(order.getCreatedAt()),
                         Collectors.summingDouble(Order::getTotalAmount)));
 
-        return monthlyRevenue.entrySet().stream()
-                .sorted(Map.Entry.comparingByKey())
-                .map(entry -> RevenueStatsDTO.builder()
-                        .month(entry.getKey().toString())
-                        .revenue(entry.getValue())
-                        .build())
-                .collect(Collectors.toList());
+        List<RevenueStatsDTO> stats = new ArrayList<>();
+        YearMonth current = YearMonth.from(startDate);
+        YearMonth end = YearMonth.now();
+
+        while (!current.isAfter(end)) {
+            stats.add(RevenueStatsDTO.builder()
+                    .month(current.toString())
+                    .revenue(monthlyRevenue.getOrDefault(current, 0.0))
+                    .build());
+            current = current.plusMonths(1);
+        }
+
+        return stats;
     }
 
     @Transactional(readOnly = true)
@@ -104,39 +114,49 @@ public class DashboardService {
                         order -> YearMonth.from(order.getCreatedAt()),
                         Collectors.counting()));
 
-        return monthlyOrders.entrySet().stream()
-                .sorted(Map.Entry.comparingByKey())
-                .map(entry -> OrderStatsDTO.builder()
-                        .month(entry.getKey().toString())
-                        .orders(entry.getValue().intValue())
-                        .build())
-                .collect(Collectors.toList());
+        List<OrderStatsDTO> stats = new ArrayList<>();
+        YearMonth current = YearMonth.from(startDate);
+        YearMonth end = YearMonth.now();
+
+        while (!current.isAfter(end)) {
+            stats.add(OrderStatsDTO.builder()
+                    .month(current.toString())
+                    .orders(monthlyOrders.getOrDefault(current, 0L).intValue())
+                    .build());
+            current = current.plusMonths(1);
+        }
+
+        return stats;
     }
 
     @Transactional(readOnly = true)
     public List<ServiceStatsDTO> getServiceStats() {
         List<Services> services = servicesRepository.findAll();
-        List<Order> orders = orderRepository.findAll();
+        Map<Long, ServiceStatsDTO.ServiceStatsDTOBuilder> statsBuilders = new HashMap<>();
 
-        Map<Long, ServiceStats> serviceStats = new HashMap<>();
-
-        // Initialize stats for all services
-        services.forEach(service -> serviceStats.put(service.getId(), new ServiceStats(service.getName())));
+        // Initialize builders for all services
+        for (Services service : services) {
+            statsBuilders.put(service.getId(), ServiceStatsDTO.builder()
+                    .name(service.getName())
+                    .count(0)
+                    .revenue(0.0));
+        }
 
         // Calculate stats from orders
-        orders.forEach(order -> {
-            ServiceStats stats = serviceStats.get(order.getService().getId());
-            if (stats != null) {
-                stats.addOrder(order.getTotalAmount());
+        List<Order> orders = orderRepository.findCompletedOrCancelledOrders();
+        for (Order order : orders) {
+            if (order.getService() != null) {
+                Long serviceId = order.getService().getId();
+                ServiceStatsDTO.ServiceStatsDTOBuilder builder = statsBuilders.get(serviceId);
+                if (builder != null) {
+                    builder.count(builder.build().getCount() + 1)
+                            .revenue(builder.build().getRevenue() + order.getTotalAmount());
+                }
             }
-        });
+        }
 
-        return serviceStats.values().stream()
-                .map(stats -> ServiceStatsDTO.builder()
-                        .name(stats.getName())
-                        .count(stats.getOrderCount())
-                        .revenue(stats.getTotalRevenue())
-                        .build())
+        return statsBuilders.values().stream()
+                .map(ServiceStatsDTO.ServiceStatsDTOBuilder::build)
                 .sorted((a, b) -> Double.compare(b.getRevenue(), a.getRevenue()))
                 .collect(Collectors.toList());
     }
@@ -152,38 +172,8 @@ public class DashboardService {
 
     private double calculateGrowth(double previous, double current) {
         if (previous == 0)
-            return 100;
-        return ((current - previous) / previous) * 100;
-    }
-
-    // Helper class for service statistics
-    private static class ServiceStats {
-        private final String name;
-        private int orderCount;
-        private double totalRevenue;
-
-        public ServiceStats(String name) {
-            this.name = name;
-            this.orderCount = 0;
-            this.totalRevenue = 0;
-        }
-
-        public void addOrder(double amount) {
-            orderCount++;
-            totalRevenue += amount;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public int getOrderCount() {
-            return orderCount;
-        }
-
-        public double getTotalRevenue() {
-            return totalRevenue;
-        }
+            return current > 0 ? 100.0 : 0.0;
+        return ((current - previous) / previous) * 100.0;
     }
 
     @Transactional(readOnly = true)
