@@ -9,26 +9,27 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-    timeout-minutes: 30  # Add overall job timeout
+    timeout-minutes: 20
 
     services:
-      # SQL Server service container
       sqlserver:
         image: mcr.microsoft.com/mssql/server:2019-latest
         env:
           ACCEPT_EULA: Y
           SA_PASSWORD: Password@sa
           MSSQL_PID: Express
+          MSSQL_MEMORY_LIMIT_MB: 1024
+          MSSQL_TCP_PORT: 1433
         ports:
           - 1433:1433
         options: >-
-          --health-cmd "/opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P 'Password@sa' -Q 'SELECT 1' || exit 1"
-          --health-interval 20s
-          --health-timeout 10s
-          --health-retries 3
-          --health-start-period 60s
-          --memory=2g
-          --memory-swap=4g
+          --health-cmd "/opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P 'Password@sa' -Q 'SELECT 1'"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+          --health-start-period 20s
+          --memory=1g
+          --cpus=2.0
 
     steps:
     - uses: actions/checkout@v3
@@ -83,16 +84,27 @@ jobs:
         chromedriver --url-base=/wd/hub &
         sudo Xvfb -ac :99 -screen 0 1280x1024x24 > /dev/null 2>&1 &
 
+    - name: Wait for SQL Server
+      run: |
+        for i in {1..30}; do
+          if /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P 'Password@sa' -Q 'SELECT 1' &>/dev/null; then
+            echo "SQL Server is ready"
+            exit 0
+          fi
+          echo "Waiting for SQL Server... ($i/30)"
+          sleep 2
+        done
+        echo "SQL Server did not become ready in time"
+        exit 1
+
     - name: Build and Test Backend
       working-directory: ./koi-pond-backend
       env:
         SPRING_DATASOURCE_URL: jdbc:sqlserver://localhost:1433;databaseName=master;encrypt=true;trustServerCertificate=true
         SPRING_DATASOURCE_USERNAME: sa
         SPRING_DATASOURCE_PASSWORD: Password@sa
-      run: |
-        # Wait for SQL Server to be ready
-        timeout 60 bash -c 'until /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P "Password@sa" -Q "SELECT 1" &> /dev/null; do sleep 5; done'
-        mvn clean verify
+      run: mvn clean verify
+      timeout-minutes: 10
       continue-on-error: false
 
     - name: Upload Test Results
