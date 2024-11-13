@@ -1,45 +1,135 @@
-# Dự án là một ứng dụng web "Quản lý đặt thi công hồ cá koi"
+# 🎏 Koi Pond Management System
 
-## Tổng quan
+## 📖 Giới Thiệu
 
-Dự án dùng công nghệ Java Spring Boot và ReactJS.
-Bên cạnh đó dự án dùng docker để chạy cơ sở dữ liệu SQL Server (Điều này là một **dependency** của dự án).
+Koi Pond Management System là một nền tảng toàn diện để quản lý dịch vụ thiết kế và thi công hồ cá Koi. Hệ thống bao gồm cả website giới thiệu sản phẩm và platform quản lý đơn hàng, khách hàng.
 
-## Setup Backend
+## ✨ Tính Năng Chính
 
-### Cách 1: Sử dụng lệnh
+### 🌐 Website Công Khai
 
-1. Điều hướng đến thư mục `koi-pond-backend`.
-2. Đảm bảo bạn đã cài đặt Java, Maven và Docker.
-3. Tạo một file `.env` (hoặc đổi tên file `.env.example`) trong thư mục `koi-pond-backend` với nội dung sau:
-   ```
-   DB_PASSWORD=[your_password]
-   ```
-   Thay `your_password` bằng mật khẩu của SQL Server.
-4. Chạy lệnh sau để build dự án:
-   ```
-   mvn clean install
-   ```
-5. Khởi động ứng dụng Spring Boot (đảm bảo máy bạn chưa dùng port 8080 và 1433):
-   ```
-   mvn spring-boot:run
-   ```
+- **Trang Chủ**: Giới thiệu tổng quan về dịch vụ
+- **Dịch Vụ**: Chi tiết các gói dịch vụ và bảng giá
+- **Dự Án**: Showcase các dự án tiêu biểu
+- **Giới Thiệu**: Thông tin về công ty và đội ngũ
+- **Liên Hệ**: Form liên hệ tư vấn
 
-### Cách 2: Sử dụng công cụ In IntelliJ IDEA
+### 👥 Hệ Thống Quản Trị
 
-1. Mở thư mục `koi-pond-backend` bằng IntelliJ IDEA.
-2. Đảm bảo bạn đã cài đặt Docker.
-3. Và nhấn vào nút `Run` để chạy ứng dụng.
+- **Dashboard**: Thống kê và báo cáo tổng quan
+- **Quản lý Đơn Hàng**: Xử lý và theo dõi đơn hàng
+- **Quản lý Người Dùng**: Phân quyền và quản lý tài khoản
+- **Quản lý Dịch Vụ**: Cập nhật thông tin dịch vụ
+- **Báo Cáo**: Phân tích dữ liệu kinh doanh
 
-## Setup Frontend
+## 🛠️ Công Nghệ Sử Dụng
 
-1. Điều hướng đến thư mục `frontend`.
-2. Đảm bảo bạn đã cài đặt Node.js.
-3. Cài đặt các dependencies:
-   ```
-   npm install
-   ```
-4. Khởi động ứng dụng React (nó sẽ tự mở trình duyệt mặt định của bạn):
-   ```
-   npm start
-   ```
+### Frontend
+
+- ⚛️ React
+- 🎨 Tailwind CSS
+- 📊 Recharts
+- 🗓️ React Big Calendar
+- 🔔 Sonner
+
+### Backend
+
+- ☕ Java Spring Boot
+- 🏪 SQL Server
+- 🔒 JWT Authentication
+- ✨ Lombok
+- 🗺️ MapStruct
+- 📝 Flyway Migration
+
+## 🚀 Hướng Dẫn Cài Đặt
+
+### Yêu Cầu Hệ Thống
+
+- Node.js 18+
+- Java JDK 21
+- SQL Server 2019 trở lên
+- Maven 3.9.9
+
+### Frontend Setup
+
+```bash
+# Di chuyển vào thư mục frontend
+cd frontend
+
+# Cài đặt dependencies
+npm install
+
+# Chạy ứng dụng
+npm start
+```
+
+### Backend Setup
+
+```bash
+# Di chuyển vào thư mục backend
+cd koi-pond-backend
+
+# Build project
+mvn clean install
+
+# Chạy ứng dụng
+mvn spring-boot:run
+```
+
+## 🧪 Testing
+
+Dự án sử dụng Selenium để test UI và demo chức năng. Để chạy demo:
+
+```java
+// Chạy toàn bộ demo
+DemoRunner runner = new DemoRunner();
+runner.runFullDemo();
+
+// Hoặc chạy từng phần
+runner.runPublicPagesDemo();  // Demo trang công khai
+runner.runContactDemo();      // Demo phần liên hệ
+runner.runAdminDemo();        // Demo phần admin
+```
+
+## 📂 Cấu Trúc Project
+
+```
+koi-pond/
+├── frontend/               # React frontend
+│   ├── src/
+│   │   ├── components/    # React components
+│   │   ├── pages/        # Page components
+│   │   ├── services/     # API services
+│   │   └── types/        # TypeScript types
+│   └── public/           # Static files
+│
+└── koi-pond-backend/      # Spring Boot backend
+    └── src/
+        ├── main/
+        │   ├── java/     # Java source code
+        │   └── resources/ # Application resources
+        └── test/
+            └── java/     # Test files
+```
+
+## 🔐 Tài Khoản Demo
+
+| **Role** | **Email**       | **Password** |
+| -------- | --------------- | ------------ |
+| Admin    | admin@gmail.com | admin123     |
+
+## 🌟 Tính Năng Nổi Bật
+
+- **Responsive Design**: Tương thích với mọi thiết bị
+- **Real-time Updates**: Cập nhật trạng thái đơn hàng real-time
+- **Interactive Dashboard**: Biểu đồ và thống kê trực quan
+- **Role-based Access**: Phân quyền chi tiết theo vai trò
+- **Automated Testing**: Test tự động với Selenium
+
+## 📄 License
+
+Project được phát triển dưới license MIT.
+
+## 👨‍💻 Nhóm Phát Triển
+
+[![Contributors](https://contrib.rocks/image?repo=TH-NDang/JavaProject)](https://github.com/TH-NDang/JavaProject/graphs/contributors)
