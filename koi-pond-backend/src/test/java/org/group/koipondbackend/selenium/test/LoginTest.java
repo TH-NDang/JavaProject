@@ -27,6 +27,9 @@ public class LoginTest {
         loginPage = new LoginPage(driver, wait);
         dashboardPage = new DashboardPage(driver, wait);
         contactPage = new ContactPage(driver, wait);
+
+        // Set slow mode for all pages
+        loginPage.setSlowMode(true);
     }
 
     @BeforeEach
