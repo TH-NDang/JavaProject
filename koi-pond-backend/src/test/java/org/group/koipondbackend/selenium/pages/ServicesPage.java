@@ -4,6 +4,13 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class ServicesPage extends BasePage {
+
+    private final By heroSection = By.xpath("//section[contains(@class, 'bg-primary-600')]");
+    private final By servicePackagesSection = By.xpath("//section[.//h2[contains(text(),'Bảng Giá Dịch Vụ')]]");
+    private final By processSection = By.xpath("//section[.//h2[contains(text(),'Quy Trình Làm Việc')]]");
+    private final By pricingSection = By.xpath("//section[.//h2[contains(text(),'Bảng Giá')]]");
+    private final By ctaSection = By.xpath("//section[.//h2[contains(text(),'Sẵn sàng bắt đầu')]]");
+
     private final By createServiceButton = By.xpath("//button[contains(text(),'Thêm Dịch vụ')]");
     private final By nameInput = By.name("name");
     private final By descriptionInput = By.tagName("textarea");
@@ -48,6 +55,43 @@ public class ServicesPage extends BasePage {
         }
 
         waitAndClick(submitButton);
+    }
+
+    public void visitServicesPage() {
+        driver.get("http://localhost:3000/services");
+        helper.addAnnotation("Trang Dịch vụ - Giới thiệu chi tiết các dịch vụ của chúng tôi");
+        helper.sleep(1500);
+    }
+
+    public void demonstrateServiceHero(String description) {
+        WebElement hero = driver.findElement(heroSection);
+        helper.highlightSection(hero, description);
+        helper.sleep(1500);
+    }
+
+    public void demonstrateServicePackages(String description) {
+        WebElement packages = driver.findElement(servicePackagesSection);
+        helper.highlightSection(packages, description);
+        helper.smoothScrollPage();
+        helper.sleep(2000);
+    }
+
+    public void demonstrateProcess(String description) {
+        WebElement process = driver.findElement(processSection);
+        helper.highlightSection(process, description);
+        helper.sleep(2000);
+    }
+
+    public void demonstratePricing(String description) {
+        WebElement pricing = driver.findElement(pricingSection);
+        helper.highlightSection(pricing, description);
+        helper.sleep(2000);
+    }
+
+    public void demonstrateCTA(String description) {
+        WebElement cta = driver.findElement(ctaSection);
+        helper.highlightSection(cta, description);
+        helper.sleep(1500);
     }
 
     public boolean isSuccessMessageDisplayed() {
