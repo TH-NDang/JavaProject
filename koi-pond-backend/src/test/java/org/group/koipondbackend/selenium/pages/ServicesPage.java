@@ -12,7 +12,7 @@ public class ServicesPage extends BasePage {
     private final By addFeatureButton = By.xpath("//button[contains(text(),'Thêm tính năng')]");
     private final By popularCheckbox = By.name("isPopular");
     private final By submitButton = By.xpath("//button[contains(text(),'Tạo mới')]");
-    private final By successMessage = By.xpath("//div[contains(text(),'thành công')]");
+    private final By successMessage = By.xpath("//div[contains(text(),'Tạo dịch vụ thành công')]");
     private final By errorMessage = By
             .xpath("//div[contains(@class, 'text-red-600') or contains(text(), 'Dịch vụ với tên này đã tồn tại')]");
 
