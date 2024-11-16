@@ -28,8 +28,8 @@ public class SystemDemoTest {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--start-maximized");
 
-        // driver = new ChromeDriver(options);
-        driver = new FirefoxDriver();
+        driver = new ChromeDriver(options);
+        // driver = new FirefoxDriver();
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         helper = new TestHelper(driver);
 
