@@ -37,15 +37,18 @@ public class Order {
     @Column(name = "total_amount", nullable = false)
     private Double totalAmount;
 
-    @Column(columnDefinition = "TEXT")
+    @Column(columnDefinition = "NVARCHAR(MAX)")
     private String requirements;
 
     @ElementCollection
     @CollectionTable(name = "order_custom_requests", joinColumns = @JoinColumn(name = "order_id"))
-    @Column(name = "custom_request", columnDefinition = "TEXT")
+    @Column(name = "custom_request", columnDefinition = "NVARCHAR(MAX)")
     private List<String> customRequests;
 
+    @Column(columnDefinition = "NVARCHAR(255)")
     private String location;
+
+    @Column(columnDefinition = "NVARCHAR(MAX)")
     private String locationNotes;
 
     @Column(name = "preferred_start_date")
@@ -60,10 +63,10 @@ public class Order {
     @Column(name = "cancelled_date")
     private LocalDateTime cancelledDate;
 
-    @Column(name = "cancellation_reason")
+    @Column(name = "cancellation_reason", columnDefinition = "NVARCHAR(MAX)")
     private String cancellationReason;
 
-    @Column(columnDefinition = "TEXT")
+    @Column(columnDefinition = "NVARCHAR(MAX)")
     private String notes;
 
     @Column(name = "created_at", nullable = false)

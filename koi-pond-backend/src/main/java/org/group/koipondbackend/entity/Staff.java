@@ -17,12 +17,12 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @SuperBuilder
 public class Staff extends User {
-    @Column(name = "department")
+    @Column(name = "department", columnDefinition = "NVARCHAR(255)")
     private String department;
 
     @Column(name = "join_date")
     private LocalDateTime joinDate;
 
-    @Column(name = "status")
+    @Column(name = "status", columnDefinition = "NVARCHAR(50)")
     private String status; // ACTIVE, INACTIVE, ON_LEAVE, etc.
 }

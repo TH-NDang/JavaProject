@@ -33,7 +33,7 @@ public class OrderHistory {
     @JoinColumn(name = "changed_by_id", nullable = false)
     private User changedBy;
 
-    @Column(columnDefinition = "TEXT")
+    @Column(columnDefinition = "NVARCHAR(MAX)")
     private String notes;
 
     @Column(name = "created_at", nullable = false)
