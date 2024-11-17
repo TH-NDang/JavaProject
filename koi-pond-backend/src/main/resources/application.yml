@@ -23,12 +23,7 @@ spring:
           characterEncoding: utf8
           useUnicode: true
           charSet: UTF-8
-http:
-  encoding:
-    charset: UTF-8
-    enabled: true
-    force: true
-
+        '[use_sql_comments]': true
   flyway:
     enabled: true
     baseline-on-migrate: true

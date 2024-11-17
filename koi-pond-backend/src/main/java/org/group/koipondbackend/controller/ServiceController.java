@@ -18,7 +18,7 @@ import java.util.List;
 public class ServiceController {
     private final ServiceService serviceService;
 
-    @GetMapping
+    @GetMapping(produces = "application/json; charset=UTF-8")
     public ResponseEntity<List<ServiceDTO>> getAllServices() {
         return ResponseEntity.ok(serviceService.getAllServices());
     }
