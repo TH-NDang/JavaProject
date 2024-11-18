@@ -13,7 +13,7 @@ _Hệ thống quản lý thiết kế và thi công hồ cá Koi chuyên nghiệ
 
 ## 🌟 Tổng Quan
 
-Koi Pond Management System là giải pháp quản lý toàn diện cho doanh nghiệp thiết kế và thi công hồ cá Koi. Hệ thống kết hợp website giới thiệu sản phẩm chuyên nghiệp với nền tảng quản lý đơn hàng thông minh, mang đến trải nghiệm mượt mà cho cả khách hàng và đội ngũ vận hành.
+Giải pháp quản lý toàn diện cho doanh nghiệp thiết kế và thi công hồ cá Koi, tích hợp website giới thiệu và nền tảng quản lý.
 
 ### ✨ Điểm Nổi Bật
 
@@ -44,26 +44,14 @@ Koi Pond Management System là giải pháp quản lý toàn diện cho doanh ng
 
 ### Frontend
 
-- ⚛️ **React 18.3**: Framework JavaScript hiện đại
-- 🎨 **Tailwind CSS**: Framework CSS tiện ích
-- 📊 **Recharts**: Thư viện biểu đồ mạnh mẽ
-- 🔔 **Sonner**: Hệ thống thông báo tinh tế
-- 📅 **React Big Calendar**: Quản lý lịch chuyên nghiệp
+- ⚛️ **React 18.3** | 🎨 **Tailwind CSS** | 📊 **Recharts**
+- 🔔 **Sonner** | 📅 **React Big Calendar**
 
-### Backend
+### Backend & DevOps
 
-- ☕ **Java 21**: Ngôn ngữ lập trình mạnh mẽ
-- 🍃 **Spring Boot**: Framework backend hiện đại
-- 💾 **SQL Server**: Hệ quản trị CSDL tin cậy
-- 🔒 **JWT**: Xác thực và phân quyền bảo mật
-- 📝 **Lombok & MapStruct**: Giảm thiểu boilerplate code
-- 🔄 **Flyway**: Quản lý migration CSDL
-
-### DevOps & Tools
-
-- 🔄 **Git & GitHub**: Quản lý mã nguồn
-- 🚀 **CI/CD**: Tự động hóa quy trình phát triển
-- 🧪 **Selenium**: Automated testing
+- ☕ **Java 21** | 🍃 **Spring Boot** | 💾 **SQL Server**
+- 🔒 **JWT** | 📝 **Lombok & MapStruct** | 🔄 **Flyway**
+- 🚀 **CI/CD** | 🧪 **Selenium**
 
 ## 🚀 Quickstart
 
@@ -96,11 +84,20 @@ mvn spring-boot:run
 | ----- | --------------- | -------- | ------------ |
 | Admin | admin@gmail.com | admin123 | Full access  |
 
-## 📱 Screenshots
+## 📸 Demo & Screenshots
 
 <div align="center">
+<details>
+<summary>📱 Click to view screenshots</summary>
+
+### Dashboard View
+
 <img src="./frontend/public/images/screenshorts/dashboard-admin.png" alt="Dashboard"/>
+
+### Order Management
+
 <img src="./frontend/public/images/screenshorts/user_managment-admin.png" alt="Order Management"/>
+</details>
 </div>
 
 ## 📝 License
