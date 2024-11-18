@@ -17,6 +17,9 @@ public class Project {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(columnDefinition = "NVARCHAR(255)")
     private String name;
+
+    @Column(columnDefinition = "NVARCHAR(MAX)")
     private String description;
 }

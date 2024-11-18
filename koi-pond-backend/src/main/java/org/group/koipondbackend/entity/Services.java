@@ -21,10 +21,10 @@ public class Services {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "NVARCHAR(255)")
     private String name;
 
-    @Column(columnDefinition = "TEXT")
+    @Column(columnDefinition = "NVARCHAR(MAX)")
     private String description;
 
     @Column(nullable = false)
@@ -32,7 +32,7 @@ public class Services {
 
     @ElementCollection
     @CollectionTable(name = "service_features", joinColumns = @JoinColumn(name = "service_id"))
-    @Column(name = "feature")
+    @Column(name = "feature", columnDefinition = "NVARCHAR(MAX)")
     private List<String> features;
 
     @Column(name = "is_popular")

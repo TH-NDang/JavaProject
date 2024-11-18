@@ -17,6 +17,9 @@ public class Feedback {
     private Long id;
 
     private Long customerId;
+
+    @Column(columnDefinition = "NVARCHAR(MAX)")
     private String content;
+
     private int rating;
 }

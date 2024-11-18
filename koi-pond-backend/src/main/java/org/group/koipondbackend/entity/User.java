@@ -19,27 +19,27 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false, unique = true, columnDefinition = "NVARCHAR(255)")
     private String email;
 
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "NVARCHAR(255)")
     private String password;
 
-    @Column(name = "full_name", nullable = false)
+    @Column(name = "full_name", nullable = false, columnDefinition = "NVARCHAR(255)")
     private String fullName;
 
-    @Column
+    @Column(columnDefinition = "NVARCHAR(20)")
     private String phone;
 
-    @Column
+    @Column(columnDefinition = "NVARCHAR(255)")
     private String address;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "NVARCHAR(50)")
     private Role role;
 
-    @Column(nullable = false)
-    private String status; // Thêm trường status
+    @Column(nullable = false, columnDefinition = "NVARCHAR(50)")
+    private String status;
 
     @Column(name = "created_at")
     private LocalDateTime createdAt;

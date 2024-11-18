@@ -145,6 +145,13 @@ const About: React.FC = () => {
       {/* Stats Section */}
       <section className="bg-gray-50 py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold mb-4">Chỉ số thống kê</h2>
+            <p className="text-gray-600 max-w-2xl mx-auto">
+              Những thành tựu đáng tự hào trong hành trình phát triển của chúng
+              tôi
+            </p>
+          </div>
           <div className="grid md:grid-cols-4 gap-8">
             {stats.map((stat, index) => {
               const Icon = stat.icon;

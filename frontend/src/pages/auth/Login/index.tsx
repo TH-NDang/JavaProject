@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Eye, EyeOff, LogIn } from "lucide-react";
+import { Eye, EyeOff, Home, LogIn } from "lucide-react";
 import { useAuth } from "../../../config/AuthContext";
 
 import { Toast } from "../../../services/toast.service";
@@ -61,9 +61,18 @@ const Login: React.FC = () => {
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
-        <Link to="/" className="flex justify-center items-center">
-          <img className="h-12 w-auto" src="/logo.svg" alt="Koi Pond Co." />
-        </Link>
+        <div className="flex justify-between items-center">
+          <Link
+            to="/"
+            className="flex items-center text-primary-600 hover:text-primary-700"
+          >
+            <Home className="h-5 w-5 mr-2" />
+            <span className="text-sm font-medium">Quay lại trang chủ</span>
+          </Link>
+          <Link to="/" className="flex items-center">
+            <img className="h-12 w-auto" src="/logo.png" alt="Koi Pond Co." />
+          </Link>
+        </div>
         <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
           Đăng nhập vào tài khoản
         </h2>

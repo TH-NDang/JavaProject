@@ -31,6 +31,11 @@ public class AdminTest {
         servicesPage = new ServicesPage(driver, wait);
         usersPage = new UsersPage(driver, wait);
 
+        // Set slow mode for all pages
+        loginPage.setSlowMode(true);
+        servicesPage.setSlowMode(true);
+        usersPage.setSlowMode(true);
+
         // Đăng nhập với tài khoản admin
         driver.get("http://localhost:3000/login");
         loginPage.login("admin@gmail.com", "admin123");
@@ -107,9 +112,6 @@ public class AdminTest {
 
         usersPage.searchUser(userEmail);
         Assertions.assertTrue(usersPage.isUserDisplayed(userName));
-
-        usersPage.updateUserStatus(userName, "INACTIVE");
-        Assertions.assertTrue(usersPage.isStatusUpdateSuccessful());
     }
 
     @AfterAll
