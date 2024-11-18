@@ -1,10 +1,28 @@
 # 🎏 Koi Pond Management System
 
-## 📖 Giới Thiệu
+<div align="center">
 
-Koi Pond Management System là một nền tảng toàn diện để quản lý dịch vụ thiết kế và thi công hồ cá Koi. Hệ thống bao gồm cả website giới thiệu sản phẩm và platform quản lý đơn hàng, khách hàng.
+![Test Status](https://github.com/TH-NDang/JavaProject/actions/workflows/ci.yml/badge.svg)
+![License](https://img.shields.io/badge/license-MIT-blue)
+![Java](https://img.shields.io/badge/Java-21-orange)
+![React](https://img.shields.io/badge/React-18.3-blue)
 
-## ✨ Tính Năng Chính
+_Hệ thống quản lý thiết kế và thi công hồ cá Koi chuyên nghiệp_
+
+</div>
+
+## 🌟 Tổng Quan
+
+Koi Pond Management System là giải pháp quản lý toàn diện cho doanh nghiệp thiết kế và thi công hồ cá Koi. Hệ thống kết hợp website giới thiệu sản phẩm chuyên nghiệp với nền tảng quản lý đơn hàng thông minh, mang đến trải nghiệm mượt mà cho cả khách hàng và đội ngũ vận hành.
+
+### ✨ Điểm Nổi Bật
+
+- 🎯 **Dashboard Thông Minh**: Theo dõi KPIs và phân tích dữ liệu kinh doanh trực quan
+- 📱 **Responsive Design**: Trải nghiệm mượt mà trên mọi thiết bị
+- 🔒 **Bảo Mật Cao**: Hệ thống phân quyền chi tiết và xác thực JWT
+- 🤖 **CI/CD Pipeline**: Tự động hóa quy trình phát triển và triển khai
+
+## 💼 Tính Năng Chính
 
 ### 🌐 Website Công Khai
 
@@ -22,114 +40,78 @@ Koi Pond Management System là một nền tảng toàn diện để quản lý 
 - **Quản lý Dịch Vụ**: Cập nhật thông tin dịch vụ
 - **Báo Cáo**: Phân tích dữ liệu kinh doanh
 
-## 🛠️ Công Nghệ Sử Dụng
+## 🛠️ Tech Stack
 
 ### Frontend
 
-- ⚛️ React
-- 🎨 Tailwind CSS
-- 📊 Recharts
-- 🗓️ React Big Calendar
-- 🔔 Sonner
+- ⚛️ **React 18.3**: Framework JavaScript hiện đại
+- 🎨 **Tailwind CSS**: Framework CSS tiện ích
+- 📊 **Recharts**: Thư viện biểu đồ mạnh mẽ
+- 🔔 **Sonner**: Hệ thống thông báo tinh tế
+- 📅 **React Big Calendar**: Quản lý lịch chuyên nghiệp
 
 ### Backend
 
-- ☕ Java Spring Boot
-- 🏪 SQL Server
-- 🔒 JWT Authentication
-- ✨ Lombok
-- 🗺️ MapStruct
-- 📝 Flyway Migration
+- ☕ **Java 21**: Ngôn ngữ lập trình mạnh mẽ
+- 🍃 **Spring Boot**: Framework backend hiện đại
+- 💾 **SQL Server**: Hệ quản trị CSDL tin cậy
+- 🔒 **JWT**: Xác thực và phân quyền bảo mật
+- 📝 **Lombok & MapStruct**: Giảm thiểu boilerplate code
+- 🔄 **Flyway**: Quản lý migration CSDL
 
-## 🚀 Hướng Dẫn Cài Đặt
+### DevOps & Tools
 
-### Yêu Cầu Hệ Thống
+- 🔄 **Git & GitHub**: Quản lý mã nguồn
+- 🚀 **CI/CD**: Tự động hóa quy trình phát triển
+- 🧪 **Selenium**: Automated testing
 
-- Node.js 18+
-- Java JDK 21
-- SQL Server 2019 trở lên
-- Maven 3.9.9
+## 🚀 Quickstart
 
-### Frontend Setup
+1. **Clone repository**
 
 ```bash
-# Di chuyển vào thư mục frontend
+git clone https://github.com/your-username/koi-pond.git
+cd koi-pond
+```
+
+2. **Frontend setup**
+
+```bash
 cd frontend
-
-# Cài đặt dependencies
 npm install
-
-# Chạy ứng dụng
 npm start
 ```
 
-### Backend Setup
+3. **Backend setup**
 
 ```bash
-# Di chuyển vào thư mục backend
 cd koi-pond-backend
-
-# Build project
 mvn clean install
-
-# Chạy ứng dụng
 mvn spring-boot:run
 ```
 
-## 🧪 Testing
+## 🔐 Demo Access
 
-Dự án sử dụng Selenium để test UI và demo chức năng. Để chạy demo:
+| Role  | Email           | Password | Capabilities |
+| ----- | --------------- | -------- | ------------ |
+| Admin | admin@gmail.com | admin123 | Full access  |
 
-```java
-// Chạy toàn bộ demo
-DemoRunner runner = new DemoRunner();
-runner.runFullDemo();
+## 📱 Screenshots
 
-// Hoặc chạy từng phần
-runner.runPublicPagesDemo();  // Demo trang công khai
-runner.runContactDemo();      // Demo phần liên hệ
-runner.runAdminDemo();        // Demo phần admin
-```
+<div align="center">
+<img src="./frontend/public/images/screenshorts/dashboard-admin.png" alt="Dashboard"/>
+<img src="./frontend/public/images/screenshorts/user_managment-admin.png" alt="Order Management"/>
+</div>
 
-## 📂 Cấu Trúc Project
+## 📝 License
 
-```
-koi-pond/
-├── frontend/               # React frontend
-│   ├── src/
-│   │   ├── components/    # React components
-│   │   ├── pages/        # Page components
-│   │   ├── services/     # API services
-│   │   └── types/        # TypeScript types
-│   └── public/           # Static files
-│
-└── koi-pond-backend/      # Spring Boot backend
-    └── src/
-        ├── main/
-        │   ├── java/     # Java source code
-        │   └── resources/ # Application resources
-        └── test/
-            └── java/     # Test files
-```
+MIT License - xem [LICENSE.md](LICENSE.md) để biết thêm chi tiết.
 
-## 🔐 Tài Khoản Demo
+---
 
-| **Role** | **Email**       | **Password** |
-| -------- | --------------- | ------------ |
-| Admin    | admin@gmail.com | admin123     |
-
-## 🌟 Tính Năng Nổi Bật
-
-- **Responsive Design**: Tương thích với mọi thiết bị
-- **Real-time Updates**: Cập nhật trạng thái đơn hàng real-time
-- **Interactive Dashboard**: Biểu đồ và thống kê trực quan
-- **Role-based Access**: Phân quyền chi tiết theo vai trò
-- **Automated Testing**: Test tự động với Selenium
-
-## 📄 License
-
-Project được phát triển dưới license MIT.
-
-## 👨‍💻 Nhóm Phát Triển
+<div align="center">
+Made with ❤️ by Team Koi Pond
 
 [![Contributors](https://contrib.rocks/image?repo=TH-NDang/JavaProject)](https://github.com/TH-NDang/JavaProject/graphs/contributors)
+
+</div>
