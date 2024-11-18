@@ -58,8 +58,8 @@ Giải pháp quản lý toàn diện cho doanh nghiệp thiết kế và thi cô
 1. **Clone repository**
 
 ```bash
-git clone https://github.com/your-username/koi-pond.git
-cd koi-pond
+git clone https://github.com/TH-NDang/JavaProject.git
+cd JavaProject
 ```
 
 2. **Frontend setup**
