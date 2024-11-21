@@ -1,5 +1,5 @@
 import axios from "../config/axios";
-import { User, CreateUserRequest, UpdateUserRequest } from "../types/user";
+import { CreateUserRequest, UpdateUserRequest } from "../types/user";
 
 export class UserService {
   static async getAllUsers(params: {

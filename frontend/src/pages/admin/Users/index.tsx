@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { UserService } from "../../../services/user.service";
 import { User, CreateUserRequest, UpdateUserRequest } from "../../../types/user";
-import { UserPlus, Search, Filter } from "lucide-react";
+import { UserPlus, Search } from "lucide-react";
 import DataTable from "../../../components/common/DataTable";
 import { Toast } from "../../../services/toast.service";
 import { CreateUserModal } from "../../../components/modals/CreateUserModal";
@@ -21,7 +21,7 @@ export default function AdminUsers() {
   const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
   const [selectedUser, setSelectedUser] = useState<User | null>(null);
 
-  const fetchUsers = async () => {
+  const fetchUsers = useCallback(async () => {
     try {
       setLoading(true);
       const response = await UserService.getAllUsers({
@@ -40,11 +40,11 @@ export default function AdminUsers() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [currentPage, searchTerm, roleFilter, statusFilter]);
 
   useEffect(() => {
     fetchUsers();
-  }, [currentPage, searchTerm, roleFilter, statusFilter]);
+  }, [fetchUsers]);
 
   const handleCreateUser = async (data: CreateUserRequest) => {
     try {

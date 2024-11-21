@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { X } from "lucide-react";
 import { OrderService } from "../../../services/order.service";
 import { OrderStatusBadge } from "./OrderStatusBadge";
@@ -20,18 +20,18 @@ const OrderDetailModal: React.FC<OrderDetailModalProps> = ({
   const [orderHistory, setOrderHistory] = useState<OrderHistory[]>([]);
   const [newStatus, setNewStatus] = useState<OrderStatus>(order.status);
 
-  useEffect(() => {
-    fetchOrderHistory();
-  }, []);
-
-  const fetchOrderHistory = async () => {
+  const fetchOrderHistory = useCallback(async () => {
     try {
       const history = await OrderService.getOrderHistory(order.id);
       setOrderHistory(history);
     } catch (error) {
       Toast.error("Không thể tải lịch sử đơn hàng");
     }
-  };
+  }, [order.id]);
+
+  useEffect(() => {
+    fetchOrderHistory();
+  }, [fetchOrderHistory]);
 
   const handleUpdateStatus = async () => {
     try {

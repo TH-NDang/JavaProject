@@ -1,6 +1,6 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import { useAuth } from "./AuthContext";
-import { ROUTES, USER_ROLES } from "../types/routes";
+import { ROUTES } from "../types/routes";
 
 // Layouts
 import PublicLayout from "../components/layouts/PublicLayout";
@@ -30,7 +30,7 @@ import PrivateRoute from "../components/guards/PrivateRoute";
 import RoleRoute from "../components/guards/RoleRoute";
 
 const AppRoutes = () => {
-  const { user, loading } = useAuth();
+  const { loading } = useAuth();
 
   if (loading) {
     return <div>Loading...</div>;

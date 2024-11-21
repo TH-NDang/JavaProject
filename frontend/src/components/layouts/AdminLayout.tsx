@@ -13,7 +13,6 @@ import {
   Menu,
   Calendar,
   BarChart2,
-  Home,
   MessageSquare,
   Wrench,
   Store,

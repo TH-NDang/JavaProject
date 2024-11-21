@@ -6,7 +6,6 @@ import MaintenanceCalendar from "../../../components/admin/Maintenance/Maintenan
 import MaintenanceScheduleModal from "../../../components/admin/Maintenance/MaintenanceScheduleModal";
 import MaintenanceCompletionModal from "../../../components/admin/Maintenance/MaintenanceCompletionModal";
 import PageHeader from "../../../components/common/PageHeader";
-import { StaffService } from "../../../services/staff.service";
 import { generateMockSchedules, mockStaff } from "./mockData";
 
 export default function MaintenanceManagement() {

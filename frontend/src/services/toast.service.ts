@@ -1,4 +1,4 @@
-import { toast, ToastT, ToasterProps } from "sonner";
+import { toast, ToasterProps } from "sonner";
 
 const defaultConfig = {
   duration: 2000,

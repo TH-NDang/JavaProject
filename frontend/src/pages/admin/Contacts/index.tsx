@@ -1,7 +1,5 @@
-// src/pages/admin/Contacts/index.tsx
-
-import React, { useState, useEffect } from "react";
-import { Search, Filter, Eye, Download } from "lucide-react";
+import { useState, useEffect, useCallback } from "react";
+import { Search, Eye, Download } from "lucide-react";
 import { Toast } from "../../../services/toast.service";
 import { ContactService } from "../../../services/contact.service";
 import { Contact, ContactStatus, CONTACT_STATUS } from "../../../types/contact";
@@ -19,7 +17,7 @@ export default function AdminContacts() {
   const [statusFilter, setStatusFilter] = useState<string>("");
   const [selectedContact, setSelectedContact] = useState<Contact | null>(null);
 
-  const fetchContacts = async () => {
+  const fetchContacts = useCallback(async () => {
     try {
       setLoading(true);
       const response = await ContactService.getAllContacts({
@@ -37,11 +35,11 @@ export default function AdminContacts() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [currentPage, searchTerm, statusFilter]);
 
   useEffect(() => {
     fetchContacts();
-  }, [currentPage, searchTerm, statusFilter]);
+  }, [fetchContacts]);
 
   const handleExportExcel = () => {
     // TODO: Implement export to Excel functionality

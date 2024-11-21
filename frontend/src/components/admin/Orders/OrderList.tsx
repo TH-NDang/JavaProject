@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { Search, Filter, Eye, XCircle } from "lucide-react";
+import React, { useState, useEffect, useCallback } from "react";
+import { Search, Eye, XCircle } from "lucide-react";
 import { OrderService } from "../../../services/order.service";
 import { Toast } from "../../../services/toast.service";
 import DataTable from "../../common/DataTable";
@@ -20,7 +20,7 @@ const OrderList: React.FC = () => {
   const [showDetailModal, setShowDetailModal] = useState(false);
   const [showCancelModal, setShowCancelModal] = useState(false);
 
-  const fetchOrders = async () => {
+  const fetchOrders = useCallback(async () => {
     try {
       setLoading(true);
       const response = await OrderService.getAllOrders({
@@ -36,11 +36,11 @@ const OrderList: React.FC = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [currentPage, searchTerm, statusFilter]);
 
   useEffect(() => {
     fetchOrders();
-  }, [currentPage, searchTerm, statusFilter]);
+  }, [fetchOrders]);
 
   const handleViewOrder = (order: Order) => {
     setSelectedOrder(order);
